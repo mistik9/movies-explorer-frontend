@@ -1,0 +1,30 @@
+.nav-tab {
+    max-width: 1280px;
+    min-height: 66px;
+       background-color: #F5F5F5;
+ 
+}
+
+.nav-tab__menu {
+    display: flex;
+    justify-content: center;
+    text-decoration-line: underline;
+    margin:0;
+    padding: 24px 0 24px 0;
+
+}
+
+.nav-tab__menu-item {
+    list-style: none;
+    color: #000000;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    margin-left: 40px;
+}
+
+.nav-tab__menu-item:first-child {
+    margin: 0;
+}
