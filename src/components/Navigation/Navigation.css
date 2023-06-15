@@ -1,0 +1,39 @@
+.navigation {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+}
+
+.navigation__list {
+    display: flex;
+}
+
+.navigation__link {
+    font-size: 12px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+.navigation__link_signup {}
+
+.navigation__link_signin {
+    background: #3456F3;
+    border-radius: 3px;
+    color: #FFFFFF;
+}
+
+.navigation__link_movies {}
+
+.navigation__link_saved-movies {}
+
+.navigation__link_profile {
+    background-color: #FAFAFA;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 40px;
+    font-size: 13px;
+    line-height: 12px;
+    background-image: url(../../images/icon-profile.svg);
+}
