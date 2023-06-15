@@ -20,15 +20,15 @@ function AboutMe() {
 
             <ul class="about-me__portfolio">Портфолио
                 <li class="about-me__portfolio-item">Статичный сайт
-                    <img class="about-me__portfolio-icon " alt="перейти на темную сторону"/>
+                    <a href="mistik9.github.io/how-to-learn/" class="about-me__portfolio-icon " target="_blank"> </a>
                 </li>
-                <li class="about-me__portfolio-item">Адаптивный сайт</li>
-                <li class="about-me__portfolio-item">Одностраничное приложение</li>
+                <li class="about-me__portfolio-item">Адаптивный сайт
+                <a href="https://mistik9.github.io/russian-travel/index.html" class="about-me__portfolio-icon " target="_blank"> </a>
+                </li>
+                <li class="about-me__portfolio-item">Одностраничное приложение
+                <a href="https://mistik9mesto.nomoredomains.monster/" class="about-me__portfolio-icon " target="_blank"> </a></li>
             </ul>
-
-
-
-        </section>
+             </section>
     )
 }
 export default AboutMe;

@@ -4,6 +4,7 @@ import AboutProject from "../AboutProject/AboutProject";
 import AboutMe from "../AboutMe/AboutMe";
 import Techs from "../Techs/Techs";
 
+
 function Main() {
     return (
         <>

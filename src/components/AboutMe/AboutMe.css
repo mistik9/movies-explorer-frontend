@@ -74,6 +74,8 @@
     letter-spacing: -0.04em;
     border-bottom: 1px solid #E8E8E8;
     padding: 20px 0 19px 0;
+    display: flex;
+    justify-content: space-between
 }
 
 .about-me__portfolio-item:first-child {
@@ -81,7 +83,15 @@
 }
 
 .about-me__portfolio-icon {
-    background-image: url("../../images/icon.svg") no-repeat center / cover;
+    background-image: url('../../images/icon.svg') ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-right: 10px;
+    width: 30px;
+    height: 60px;
+
+
 
 
 }

@@ -1,15 +1,38 @@
 .footer {
-
+    max-width: 1280px;
+    width: 100%;
+    min-height: 172px;
+    background: #FAFAFA;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0 70px 20px 70px;
 }
+
 .footer__project-name {
+    text-align: center;
+    color: #A0A0A0;
+    margin: 0 0 20px 0;
+}
 
+.footer__block {
+    display: flex;
+    border-top: 1px solid #E8E8E8;
+    justify-content: space-between
 }
-.footer__copyright {
-    
-}
+
+.footer__copyright {}
+
 .footer__links {
-    
+    display: flex;
+    list-style: none;
+ 
 }
+
 .footer__link {
-    
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
 }
