@@ -12,12 +12,16 @@ import "./Main.css";
 function Main() {
     return (
         <div class="main">
+            <div class="main__section_gray">
             <Header />
-            <Promo />
-            <NavTab />
-            <AboutProject />
-            <Techs />
-            <AboutMe />
+            </div>
+            <main class="main__content">
+                <Promo />
+                <NavTab />
+                <AboutProject />
+                <Techs />
+                <AboutMe />
+            </main>
             <Footer />
         </div>
 

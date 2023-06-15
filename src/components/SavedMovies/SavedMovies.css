@@ -1,3 +1,20 @@
 .saved-movies {
-    
+    max-width: 1280px;
+    width: 100%;
+    font-family: 'Inter';
+    font-style: normal;
+    background: #E5E5E5;
+
+}
+
+.saved-movies__container{
+    display: grid;
+    grid-row-gap: 24px;
+    grid-column-gap: 30px;
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fill, minmax(364px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 70px 0 30px 0;
+    max-width: 1280px;
 }

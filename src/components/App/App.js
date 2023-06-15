@@ -18,10 +18,6 @@ function App(){
           <Route path="/signin" element= {} />
           <Route path="/signup" element= {} /> */}
           </Routes>
-        <Header />
-        <Main/>
-        <Footer/>
-        <Movies/>
         </>
     )
 }

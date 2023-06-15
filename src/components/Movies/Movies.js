@@ -9,9 +9,11 @@ function Movies() {
     return (
         <div class="movies">
             <Header />
-            <SearchForm />
-            <Preloader />
-            <MoviesCardList />
+            <main class="movie__content">
+                <SearchForm />
+                <Preloader />
+                <MoviesCardList />
+            </main>
             <Footer />
         </div>
     )

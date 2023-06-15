@@ -1,39 +1,59 @@
-.navigation {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-}
+.navigation {}
 
 .navigation__list {
     display: flex;
 }
 
 .navigation__link {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
     font-size: 12px;
     line-height: 16px;
-
     display: flex;
     align-items: center;
     text-align: right;
+    
 }
 
-.navigation__link_signup {}
+.navigation__link_signup {
+    margin: 0;
+}
 
 .navigation__link_signin {
     background: #3456F3;
     border-radius: 3px;
     color: #FFFFFF;
+    max-width: 76px;
+    padding: 8px 20px;
+    margin-left: 30px;
 }
 
-.navigation__link_movies {}
+.navigation__link_movies {
+    font-size: 14px;
+    line-height: 18px;
+    text-align: right;
+    
+}
 
-.navigation__link_saved-movies {}
+.navigation__link_saved-movies {
+    margin-left: 20px;
+}
 
 .navigation__link_profile {
     background-color: #FAFAFA;
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
     border-radius: 40px;
+    height: 32px;
+    width: 100px;
     font-size: 13px;
     line-height: 12px;
-    background-image: url(../../images/icon-profile.svg);
+
+}
+
+.navigation__icon_profil {
+        background-repeat: no-repeat;
+    background-position: right;
+    margin-left: 50px;
+    padding: 3px;
 }
