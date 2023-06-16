@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { Route, Routes } from 'react-router-dom';
 import React from 'react';
+import Profile from "../Profile/Profile";
 
 function App(){
 
@@ -14,8 +15,8 @@ function App(){
           <Route path="/" element= {<Main />} />
           <Route path="/movies" element= {<Movies />} />
           <Route path="/saved-movies" element= {<SavedMovies />} />
-          {/* <Route path="/profile" element= {} />
-          <Route path="/signin" element= {} />
+          <Route path="/profile" element= {<Profile />} />
+          {/* <Route path="/signin" element= {} />
           <Route path="/signup" element= {} /> */}
           </Routes>
         </>
