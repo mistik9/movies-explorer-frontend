@@ -3,10 +3,10 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 
-function SavedMovies() {
+function SavedMovies({ isLoggedIn }) {
     return (
         <div class="saved-movies">
-            <Header/>
+            <Header isLoggedIn={true}/>
             <main class="saved-movies__container">
                 <MoviesCard />
                 <MoviesCard />

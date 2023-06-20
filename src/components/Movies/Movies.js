@@ -5,10 +5,10 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Movies.css"
 
-function Movies() {
+function Movies({ isLoggedIn }) {
     return (
         <div class="movies">
-            <Header />
+            <Header isLoggedIn={true}/>
             <main class="movie__content">
                 <SearchForm />
                 <Preloader />

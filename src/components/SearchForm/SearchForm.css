@@ -1,29 +1,32 @@
 .serch {
     max-width: 1280px;
-    width: 100%;
-    min-height: 222px;
-    padding: 80px 70px 94px 70px;
+    padding: 80px 70px 83px 70px;
     font-family: Inter;
     font-style: normal;
     font-weight: 400;
+    border-bottom: 1px solid rgb(170, 170, 170, 0.2) ;
+
 }
 
 .serch__form {
-    display: grid;
-    grid-template-columns: minmax(min-content, max-content) 1fr minmax(min-content, max-content);
+    width: 100%;
+    display: flex;
     align-items: center;
-    min-width: 100%;
-    
+    justify-content: space-between;
+
+
 }
 
 .serch__input {
-    width: 100%;
     min-height: 48px;
-    box-sizing: border-box;
-    position: absolute;
     opacity: 0.2;
     border: 1.5px solid #AAAAAA;
     border-radius: 50px;
+    position: relative;
+    width: 100%;
+    
+    padding: 15px 0 15px 22px;
+
 
 }
 
@@ -33,7 +36,11 @@
     background: #3456F3;
     border-radius: 48px;
     color: #FFFFFF;
-    border-color:#3456F3;
-}
+    border: none;
+    position: relative;
+    right: 69px;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 18px;
 
-.serch__checkbox {}
+}

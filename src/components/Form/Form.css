@@ -1,0 +1,91 @@
+.form {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    max-width: 396px;
+    margin: auto;
+    width: 100%;
+
+
+    
+
+
+}
+
+.form__title {
+    font-size: 24px;
+    line-height: 29px;
+    margin: 20px 0 0 0;
+    font-weight: 400;
+
+}
+
+.form-label {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 0 0;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A0A0A0;
+}
+
+
+
+.form__input {
+    background: #F4F4F4;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+    min-height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.form__input:focus {
+    outline-width: 0;
+}
+
+
+.form__input_type_name {}
+
+.form__input_type_email {}
+
+.form__input_type_password {}
+
+.form__save {
+    width: 100%;
+    background: #3456F3;
+    border-radius: 3px;
+    margin-top: 69px;
+    min-height: 45px;
+    color: #FFFFFF;
+    border: none;
+}
+
+.form__save_signin {
+margin-top: 179px;
+}
+
+.form__sign-in {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center
+}
+
+.form__sign-in-text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin: 0;
+    color: #A0A0A0;
+}
+
+.form__sign-in-link {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #3456F3;
+    margin-left: 6px;
+}

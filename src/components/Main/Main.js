@@ -9,11 +9,11 @@ import "./Main.css";
 
 
 
-function Main() {
+function Main({ isLoggedIn }) {
     return (
         <div class="main">
             <div class="main__section_gray">
-            <Header />
+            <Header isLoggedIn={false}/>
             </div>
             <main class="main__content">
                 <Promo />

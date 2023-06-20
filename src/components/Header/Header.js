@@ -1,15 +1,15 @@
 import "./Header.css";
-import Logo from "../../images/logo.svg";
+import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 
 
 
-function Header() {
+function Header({ isLoggedIn }) {
     return (
- <header class="header">
-    <img class="header__logo" src={Logo} alt="Логотип"></img>
-<Navigation />
- </header>
+        <header class="header">
+            <Logo />
+            <Navigation isLoggedIn={isLoggedIn}/>
+        </header>
     )
 }
 export default Header

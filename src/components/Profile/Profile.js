@@ -2,18 +2,22 @@ import "../Profile/Profile.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-function Profile() {
+function Profile({ isLoggedIn }) {
     return (
         <div class='profile'>
-            <Header />
+            <Header isLoggedIn={true}/>
             <main class='profile__content'>
                 <h2 class="profile__title">Привет, Евгения!</h2>
                 <form class="profile__form">
-                    <input class="profile__input" placeholder="Имя"/>Евгения
-                    
-                    <input class="profile__input" placeholder="E-mail"/>morg.evgenya@yandex.ru
-                   
-                    <button class="profile__btn">Редактировать</button>
+                    <label class="profile__input-label">
+                    <span className="profile__subtitle">Имя</span>
+                    <input class="profile__input" name="name" required/>
+                    </label>
+                    <label class="profile__input-label">
+                    <span className="profile__subtitle">E-mail</span>
+                        <input class="profile__input"/>
+                    </label>
+                    <button class="profile__btn profile__btn_edit">Редактировать</button>
                 </form>
                 <button class="profile__btn profile__btn_red">Выйти из аккаунта</button>
             </main>

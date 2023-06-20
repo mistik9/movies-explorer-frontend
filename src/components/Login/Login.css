@@ -1,0 +1,41 @@
+.login {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    padding: 70px 0;
+    margin: auto;
+    max-width: 396px;
+
+}
+
+.login__title {
+    font-size: 24px;
+    line-height: 29px;
+    margin: 20px 0 0 0;
+    font-weight: 400;
+
+}
+
+.login__sign-in {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center
+}
+
+.login__sign-in-text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin: 0;
+    color: #A0A0A0;
+}
+
+.login__sign-in-link {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #3456F3;
+    margin-left: 6px;
+}
