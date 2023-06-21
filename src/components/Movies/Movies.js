@@ -9,7 +9,7 @@ function Movies({ isLoggedIn }) {
     return (
         <div class="movies">
             <Header isLoggedIn={true}/>
-            <main class="movie__content">
+            <main class="movies__content">
                 <SearchForm />
                 <Preloader />
                 <MoviesCardList />

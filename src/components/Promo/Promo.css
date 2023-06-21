@@ -6,8 +6,10 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    box-sizing: border-box;
 
 }
+
 
 .promo__title {
     position: absolute;
@@ -19,10 +21,21 @@
     text-align: center;
     letter-spacing: -0.04em;
     max-width: 730px;
+    top: 144px;
 }
 
 .promo__image {
     max-width: 320px;
     max-height: 320px;
+    margin: 82px 0 122px 0;
 
+}
+
+@media screen and (max-width: 1000px) {
+    .promo {
+        opacity: 0;
+        background: #FAFAFA;
+        min-height: 924px;
+
+    }
 }

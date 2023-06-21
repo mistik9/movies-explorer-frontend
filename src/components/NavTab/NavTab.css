@@ -27,3 +27,9 @@
 .nav-tab__menu-item:first-child {
     margin: 0;
 }
+
+@media screen and (max-width: 1000px) {
+    .nav-tab {
+        visibility: hidden
+    }
+}

@@ -7,7 +7,7 @@
     width: 100%;
 
 
-    
+
 
 
 }
@@ -60,10 +60,13 @@
     min-height: 45px;
     color: #FFFFFF;
     border: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
 }
 
 .form__save_signin {
-margin-top: 179px;
+    margin-top: 160px;
 }
 
 .form__sign-in {

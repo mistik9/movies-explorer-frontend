@@ -1,13 +1,11 @@
 .footer {
-
-    min-height: 172px;
     background: #FAFAFA;
     font-family: Inter;
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
-    padding: 0 70px 20px 70px;
+    padding: 79px 70px 20px 70px;
 }
 
 .footer__project-name {
@@ -22,16 +20,33 @@
     justify-content: space-between
 }
 
-.footer__copyright {}
+.footer__copyright {
+    margin: 20px 0;
+}
 
 .footer__links {
     display: flex;
     list-style: none;
- 
+
 }
 
 .footer__link {
     text-decoration: none;
     color: black;
     margin-left: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    .footer {
+        background: #FAFAFA;
+        padding: 79px 30px 20px 30px;
+    }
+
+    .footer__copyright {
+        margin: 20px 0 0 0;
+    }
+    .footer__links {
+       margin-top: 20px;
+    
+    }
 }

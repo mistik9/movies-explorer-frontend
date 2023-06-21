@@ -1,8 +1,8 @@
 import "./SectionTitle.css";
 
-function SectionTitle() {
+function SectionTitle({ title }) {
   return (
-      <h2 class="section-title"></h2>
+      <h2 class="section-title">{title}</h2>
   
   )
 }

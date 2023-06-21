@@ -5,8 +5,7 @@
     background: #FAFAFA;
     font-family: Inter;
     font-style: normal;
-    font-weight: 400;
-    padding:246px 0 60px 0;
+      padding:246px 0 60px 0;
     display: flex;
     flex-direction: column;
 
@@ -17,6 +16,7 @@
    font-size: 140px;
     line-height: 169px;
     text-align: center;
+    font-weight: 400;
 
 }
 
@@ -36,4 +36,9 @@
     border: 0;
     background: none;
 
+}
+@media screen and (max-width: 1000px) {
+    .notfound {
+        padding: 408px 0;
+    }
 }

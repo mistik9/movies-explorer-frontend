@@ -5,13 +5,13 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 function AboutProject() {
     return (
         <section class="about-project">
-            <SectionTitle  />О проекте
+            <SectionTitle  title="О проекте"/>
             <ul class="about-project__list">
-                <li>
+                <li class="about-project__list-item">
                     <h3 class="about-project__subtitle">Дипломный проект включал 5 этапов</h3>
                     <p class="about-project__text">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.</p>
                 </li>
-                <li>
+                <li class="about-project__list-item">
                     <h3 class="about-project__subtitle">На выполнение диплома ушло 5 недель</h3>
                     <p class="about-project__text">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
                 </li>

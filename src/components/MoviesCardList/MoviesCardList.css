@@ -1,19 +1,17 @@
-.movies {
-    max-width: 1280px;
-    width: 100%;
+.card-list {
     font-family: 'Inter';
     font-style: normal;
     background: #FAFAFA;
-    padding: 70px;
+    padding: 0 70px;
 
 }
 
-.movies__container {
+.card-list__list {
     display: grid;
-    grid-row-gap: 24px;
-    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    grid-column-gap: 24px;
     box-sizing: border-box;
-    grid-template-columns: repeat(auto-fill, minmax(364px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 364px));
     list-style: none;
     margin: 0;
     padding: 70px 0 30px 0;
@@ -21,14 +19,36 @@
 
 }
 
-.movies__item {}
+.card-list__item {}
 
-.movies__btn {
+.card-list__btn {
     width: 100%;
     min-height: 36px;
     background: #F4F4F4;
     border-radius: 6px;
     border: none;
-    margin: 50px 0 80px 0;
+    margin: 50px 0 10px 0;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
 
+}
+@media screen and (max-width: 1000px) {
+    .card-list {
+        padding: 0 30px;
+    
+    }
+    .card-list__list {
+      
+        grid-row-gap: 36px;
+        grid-column-gap: 30px;
+             grid-template-columns: repeat(auto-fill, minmax(300px, 339px));
+   
+    }
+    .card-list__btn {
+
+        margin: 50px 0 80px 0;
+ 
+    
+    }
 }

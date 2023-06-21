@@ -19,7 +19,7 @@ function Form({ isRegister }) {
 <label class="form-label">Пароль
 <input type="password" id="password"  className="form__input form__input_type_password" required
     minLength="2" maxLength="200" />
-<span id="password-error" className="error"></span>
+<span id="password-error" className="error">Что-то</span>
 <label></label>
 </label>
 <button className={`form__save ${isRegister ? "" : "form__save_signin"}`} type="submit">{isRegister ? "Зарегистрироваться" : "Войти"}</button>

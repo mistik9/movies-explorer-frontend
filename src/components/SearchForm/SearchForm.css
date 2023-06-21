@@ -1,10 +1,11 @@
 .serch {
     max-width: 1280px;
     padding: 80px 70px 83px 70px;
+    margin-bottom: 10px;
     font-family: Inter;
     font-style: normal;
     font-weight: 400;
-    border-bottom: 1px solid rgb(170, 170, 170, 0.2) ;
+    border-bottom: 1px solid rgb(170, 170, 170, 0.2);
 
 }
 
@@ -12,8 +13,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
+    position: relative;
 
 }
 
@@ -22,25 +22,48 @@
     opacity: 0.2;
     border: 1.5px solid #AAAAAA;
     border-radius: 50px;
-    position: relative;
     width: 100%;
-    
     padding: 15px 0 15px 22px;
 
 
 }
 
 .serch__btn {
-    width: 80px;
+    width: 59px;
     height: 34px;
     background: #3456F3;
     border-radius: 48px;
     color: #FFFFFF;
     border: none;
-    position: relative;
-    right: 69px;
     font-weight: 500;
     font-size: 11px;
     line-height: 18px;
+    position: absolute;
+    right: 230px;
+    margin: 7px;
 
+}
+
+@media screen and (max-width: 1000px) {
+    .serch__form {
+        flex-direction: column;
+    }
+
+    .serch {
+        align-items: center;
+        padding: 60px 30px 58px 30px;
+
+    }
+
+    .serch__input {
+        margin-bottom: 38px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .serch__btn {
+        right: 1px;
+        margin: 7px;
+
+    }
 }

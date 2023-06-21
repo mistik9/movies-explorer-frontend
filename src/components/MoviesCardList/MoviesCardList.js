@@ -3,28 +3,28 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList() {
     return (
-        <section class="movies">
-            <ul class="movies__container">
-                <li class="movies__item">
+        <section class="card-list">
+            <ul class="card-list__list">
+                <li class="card-list__item">
                     <MoviesCard />
                 </li>
-                <li class="movies__item">
+                <li class="card-list__item">
                     <MoviesCard />
                 </li>
-                <li class="movies__item">
+                <li class="card-list__item">
                     <MoviesCard />
                 </li>
-                <li class="movies__item">
+                <li class="card-list__item">
                     <MoviesCard />
                 </li>
-                <li class="movies__item">
+                <li class="card-list__item">
                     <MoviesCard />
                 </li>
-                <li class="movies__item">
+                <li class="card-list__item">
                     <MoviesCard />
                 </li>
             </ul>
-            <button class="movies__btn" type="button">Еще</button>
+            <button class="card-list__btn" type="button">Еще</button>
         </section>
     )
 }

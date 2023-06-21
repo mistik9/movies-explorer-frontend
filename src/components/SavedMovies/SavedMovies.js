@@ -1,16 +1,17 @@
 import "./SavedMovies.css";
-import MoviesCard from "../MoviesCard/MoviesCard";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import SearchForm from "../SearchForm/SearchForm";;
 
 function SavedMovies({ isLoggedIn }) {
     return (
         <div class="saved-movies">
-            <Header isLoggedIn={true}/>
+            <Header isLoggedIn={true} />
+
             <main class="saved-movies__container">
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
+            <SearchForm />
+                <MoviesCardList />
             </main>
             <Footer />
         </div>
