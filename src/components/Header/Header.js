@@ -4,11 +4,11 @@ import Navigation from "../Navigation/Navigation";
 
 
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, openSideMenu }) {
     return (
         <header class="header">
             <Logo />
-            <Navigation isLoggedIn={isLoggedIn}/>
+            <Navigation isLoggedIn={isLoggedIn} openSideMenu={openSideMenu}/>
         </header>
     )
 }
