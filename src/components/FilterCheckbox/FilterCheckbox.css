@@ -1,73 +1,46 @@
-.checkbox.style-e {
-    display: inline-block;
-    position: relative;
-    padding-left: 50px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    margin-left: 14px;
+.checkbox {
+  font-family: "Inter", "Arial", "sans-serif";
+  display: flex;
+  align-items: center;
+  margin-left: 41px;
+ }
 
-   
-  }
-  .checkbox.style-e input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+.checkbox__name {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+}
 
-   
+.checkbox__image {
+  background-image: url(../../images/smalltumb.svg);
+  width: 36px;
+  height: 20px;
+  margin-left: 14px;
+  cursor: pointer;
+}
+
+
+.checkbox__input {
+visibility: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  .checkbox__image {
+    margin-left: 12px;
   }
-  .checkbox.style-e input:checked ~ .checkbox__checkmark {
-    background-color:#2BE080;
+
+  .checkbox {
+    margin: 0;
   }
-  .checkbox.style-e input:checked ~ .checkbox__checkmark:after {
-    left: 21px;
+}
+
+@media screen and (max-width: 540px) {
+  .checkbox__image {
+    margin-left: 12px;
   }
-  .checkbox.style-e:hover input ~ .checkbox__checkmark {
-    background-color: #eee;
-  }
-  .checkbox.style-e:hover input:checked ~ .checkbox__checkmark {
-    background-color: #2BE080;
-  }
-.checkbox__checkmark {
-    position: absolute;
-    top: 1px;
-    left: 0;
-    height: 20px;
-    width: 36px;
-    background-color: #eee;
-    transition: background-color 0.25s ease;
-    border-radius: 11px;
-  }
-.checkbox__checkmark:after {
-    content: "";
-    position: absolute;
-    left: 6px;
-    top: 6px;
-    width: 8px;
-    height: 8px;
-    display: block;
-    background-color: #fff;
-    border-radius: 50%;
-    transition: left 0.25s ease;
-  }
-  .checkbox__body {
-    color: #000000;
-    font-weight: 400;
-    font-size: 13px;
+
+  .checkbox__name {
+    font-size: 11px;
     line-height: 18px;
-    transition: color 0.25s ease;
-    display: flex;
-    margin-left: 48px;
   }
-  @media screen and (max-width: 1000px) {
-    .checkbox.style-e {
-      margin-left: 12px;
-    }
-    .checkbox__body {
-      margin:0;
-    }
-  }
+}

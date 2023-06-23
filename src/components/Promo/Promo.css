@@ -1,4 +1,5 @@
 .promo {
+    font-family: "Inter", "Arial", "sans-serif";
     min-height: 524px;
     display: flex;
     flex-direction: column;
@@ -14,7 +15,6 @@
 .promo__title {
     position: absolute;
     color: #000000;
-    font-family: Inter;
     font-weight: 400;
     font-size: 50px;
     line-height: 58px;
@@ -33,9 +33,41 @@
 
 @media screen and (max-width: 1000px) {
     .promo {
-        opacity: 0;
-        background: #FAFAFA;
+          background: #FAFAFA;
         min-height: 924px;
+    }
 
+    .promo__title {
+        opacity: 0;
+    }
+
+    .promo__image {
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .promo {
+        min-height: 570px;
+        background-color: #DDDEE3;
+        margin: 0;
+    }
+
+    .promo__title {
+        opacity: 1;
+        color: #000000;
+        font-size: 31px;
+        line-height: 39px;
+        letter-spacing: -1.24px;
+        width: 300px;
+        top: 207px;
+        margin: 0;
+    }
+
+    .promo__image {
+        opacity: 1;
+        max-width: 248px;
+        max-height: 248px;
+    
     }
 }

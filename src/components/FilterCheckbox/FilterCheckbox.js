@@ -3,11 +3,11 @@ import "./FilterCheckbox.css";
 
 function FilterCheckbox() {
   return (
-     <div class="checkbox__body">Короткометражки
-    <label class="checkbox style-e">
-      <input type="checkbox" />
-      <div class="checkbox__checkmark"></div>
-    </label>
+    <div className="checkbox">
+      <p className="checkbox__name">Короткометражки</p>
+      <div className="checkbox__image">
+        <input  className="checkbox__input" type="checkbox"/>
+      </div>
     </div>
   )
 }

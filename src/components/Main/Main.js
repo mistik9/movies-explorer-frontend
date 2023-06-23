@@ -9,13 +9,13 @@ import "./Main.css";
 
 
 
-function Main({ isLoggedIn }) {
+function Main({ isLoggedIn, isVisible }) {
     return (
-        <div class="main">
-            <div class="main__section_gray">
-            <Header isLoggedIn={false}/>
+        <div className="main">
+            <div className="main__section_gray">
+            <Header isLoggedIn={false} isVisible={false}/>
             </div>
-            <main class="main__content">
+            <main className="main__content">
                 <Promo />
                 <NavTab />
                 <AboutProject />

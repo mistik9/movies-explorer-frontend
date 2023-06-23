@@ -1,5 +1,5 @@
-.section-title{
-    font-family: 'Inter';
+.section-title {
+    font-family: "Inter", "Arial", "sans-serif";
     font-style: normal;
     font-weight: 400;
     font-size: 22px;
@@ -8,11 +8,11 @@
     margin-bottom: 23px;
 }
 
-@media screen and (max-width: 1000px) {
-    .promo {
-        opacity:0;       
-        background: #FAFAFA;
-        min-height: 924px;
-   
+@media screen and (max-width: 540px) {
+    .section-title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        margin-bottom: 28px;
+        margin-top: 0;
     }
 }

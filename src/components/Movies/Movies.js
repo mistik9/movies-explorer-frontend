@@ -5,13 +5,13 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Movies.css"
 
-function Movies({ isLoggedIn }) {
+function Movies({ isLoggedIn, openSideMenu, isVisible }) {
     return (
-        <div class="movies">
-            <Header isLoggedIn={true}/>
-            <main class="movies__content">
+        <div className="movies">
+            <Header isLoggedIn={true} isVisible={true} openSideMenu={openSideMenu}/>
+            <main className="movies__content">
                 <SearchForm />
-                <Preloader />
+                <Preloader isLoading={false}/>
                 <MoviesCardList />
             </main>
             <Footer />

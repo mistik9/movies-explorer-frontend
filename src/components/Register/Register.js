@@ -6,9 +6,9 @@ import Form from "../Form/Form";
 
 function Register({ isRegister }) {
     return (
-        <main class='register'>
+        <main className="register">
             <Logo />
-            <h2 class="register__title">Добро пожаловать!</h2>
+            <h2 className="register__title">Добро пожаловать!</h2>
           <Form isRegister={isRegister}/>
             <div className="register__sign-in">
                 <p className="register__sign-in-text">Уже зарегистрированы? </p>

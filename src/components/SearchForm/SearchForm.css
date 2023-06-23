@@ -2,7 +2,7 @@
     max-width: 1280px;
     padding: 80px 70px 83px 70px;
     margin-bottom: 10px;
-    font-family: Inter;
+    font-family: "Inter", "Arial", "sans-serif";
     font-style: normal;
     font-weight: 400;
     border-bottom: 1px solid rgb(170, 170, 170, 0.2);
@@ -39,8 +39,9 @@
     font-size: 11px;
     line-height: 18px;
     position: absolute;
-    right: 230px;
+    right: 200px;
     margin: 7px;
+    cursor: pointer;
 
 }
 
@@ -58,6 +59,29 @@
     .serch__input {
         margin-bottom: 38px;
         font-size: 14px;
+        line-height: 18px;
+    }
+
+    .serch__btn {
+        right: 1px;
+        margin: 7px;
+
+    }
+}
+@media screen and (max-width: 540px) {
+    .serch__form {
+        flex-direction: column;
+    }
+
+    .serch {
+        align-items: center;
+        padding: 60px 10px 58px 10px;
+
+    }
+
+    .serch__input {
+        margin-bottom: 38px;
+        font-size: 11px;
         line-height: 18px;
     }
 

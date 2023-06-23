@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg"
 function Logo() {
     return (
         <div>
-            <img class="logo" src={logo} alt="логотип приложения" />
+            <img className="logo" src={logo} alt="логотип приложения" />
         </div>
     );
 }
