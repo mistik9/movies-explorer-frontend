@@ -56,6 +56,11 @@
     line-height: 17px;
     cursor: pointer;
 }
+
+.form__save:hover {
+    background: #143df0;
+}
+
 .form__save_signin {
     margin-top: 179px;
 }

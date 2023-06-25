@@ -14,8 +14,7 @@
     display: grid;
     grid-template-columns: 600px 270px;
     grid-template-rows: 76px 44px auto 14px;
-    column-gap: 270px;
-
+    justify-content: space-around;
 }
 
 .about-me__title {
@@ -70,15 +69,8 @@
 }
 
 .about-me__portfolio-item {
-    color: #000000;
-    text-decoration: none;
-    font-size: 30px;
-    line-height: 50px;
-    letter-spacing: -0.04em;
     border-bottom: 1px solid #E8E8E8;
-    padding: 20px 0 10px 0;
-    display: flex;
-    justify-content: space-between
+    padding: 20px 0 18px 0;
 }
 
 .about-me__portfolio-item:first-child {
@@ -90,13 +82,18 @@
     padding-bottom: 0;
 }
 
-.about-me__portfolio-icon {
+.about-me__portfolio-link {
+    display: flex;
+    justify-content: space-between;
     text-decoration: none;
     color: #000000;
+}
+
+.about-me__portfolio-link-name {
     font-weight: 400;
     font-size: 30px;
-    line-height: 60px;
-
+    line-height: 50px;
+    letter-spacing: -1.2px;
 
 }
 
@@ -158,7 +155,7 @@
 
 @media screen and (max-width: 540px) {
     .about-me {
-        padding: 70px 14px ;
+        padding: 70px 14px;
     }
 
     .about-me__title {

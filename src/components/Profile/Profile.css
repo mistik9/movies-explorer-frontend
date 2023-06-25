@@ -68,6 +68,10 @@
     cursor: pointer;
 }
 
+.profile__btn:hover {
+    background: #143df0;
+}
+
 
 .profile__btn_edit {
     margin-top: 204px;

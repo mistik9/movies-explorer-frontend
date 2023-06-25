@@ -42,7 +42,10 @@
     right: 200px;
     margin: 7px;
     cursor: pointer;
+}
 
+.serch__btn:hover {
+    background: #143df0;
 }
 
 @media screen and (max-width: 1000px) {
