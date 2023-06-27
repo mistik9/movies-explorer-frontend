@@ -1,13 +1,14 @@
 import "./MoviesCard.css";
-import Pic from "../../images/pic.png"
+import { MAIN_API_URL } from "../../utils/consts";
 
-function MoviesCard() {
+
+function MoviesCard({ nameRU, duration, image }) {
     return (
                   <div className="movies-card">
-                <h3 className="movies-card__title">33 слова о дизайне</h3>
+                <h3 className="movies-card__title">{nameRU}</h3>
                 <button className="movies-card__save-btn" type="button"></button>
-                <p className="movies-card__duration">1ч 47м</p>
-                <img className="movies-card__img" src ={Pic} alt="Постер к фильму"></img>
+                <p className="movies-card__duration">{duration}</p>
+                <img className="movies-card__img" src ={image} alt="Постер к фильму"></img>
             </div>
        
     )
