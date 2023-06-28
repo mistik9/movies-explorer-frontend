@@ -5,37 +5,56 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import api from "../../utils/MainApi";
+import getMovies from "../../utils/MoviesApi";
 import "./Movies.css";
 
 
 function Movies({ isLoggedIn, openSideMenu, isVisible }) {
 
-    const [userMovies, setUserMovies] = React.useState([]);
+    const [allMovies, setAllMovies] = React.useState([]);
     const [isPreloader, setIsPreloader] = React.useState(false);
     const [isFoundMovies, setIsFoundMovies] = React.useState([]);
 
+    React.useEffect(() => {
+        getMovies()
+            .then((res) => {
+                setAllMovies(res)
+            })
+            .catch((err) => console.log(err))
+    }, [])
 
     React.useEffect(() => {
-        api.getMovies()
-          .then((res) => {
-            setUserMovies(res);
-          })
-          .catch((e) => console.log(e));
-      }, [ ]);
-
-      function serchMovies() {
-        
-      }
-
-
-
+        localStorage.setItem('allMovies',  JSON.stringify(allMovies))
    
+    }, [allMovies])
+
+
+    React.useEffect(() => {
+        const movies = JSON.parse(localStorage.getItem('allMovies'));
+        
+        setAllMovies(movies)
+   
+    }, [])
+
+    function renderMovies() {
+        setIsPreloader(false);
+    }
+
+  
+
+
+
+
+
+
+
+
     return (
         <div className="movies">
-            <Header isLoggedIn={isLoggedIn} isVisible={true} openSideMenu={openSideMenu}/>
+            <Header isLoggedIn={isLoggedIn} isVisible={true} openSideMenu={openSideMenu} />
             <main className="movies__content">
-                <SearchForm serchMovies={onSerchMovies}/>
-                <Preloader isLoading={false}/>
+                <SearchForm />
+                <Preloader isLoading={false} />
                 <MoviesCardList />
             </main>
             <Footer />
