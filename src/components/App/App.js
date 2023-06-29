@@ -30,8 +30,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Main isLoggedIn={false} isVisible={false} />} />
                 <Route path="/movies" element={<Movies isLoggedIn={true} isVisible={true} openSideMenu={openSideMenu} isLoading={false} />} />
-                <Route path="/saved-movies" element={<SavedMovies isLoggedIn={true} isVisible={true}
-                />} />
+                <Route path="/saved-movies" element={<SavedMovies isLoggedIn={true} isVisible={true} openSideMenu={openSideMenu}/>} />
                 <Route path="/profile" element={<Profile isLoggedIn={true} isVisible={true} />} />
                 <Route path="/signin" element={<Login isRegister={false} />} />
                 <Route path="/signup" element={<Register isRegister={true} />} />

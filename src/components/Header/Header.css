@@ -4,8 +4,13 @@
     justify-content: space-between;
     align-items: center
 }
+
 .header_hidden {
     visibility: visible;
+}
+
+.header_colored {
+    background: #DDDEE3;
 }
 
 @media screen and (max-width: 1000px) {
@@ -13,7 +18,9 @@
         padding: 15px 30px;
     }
 
-    .header_hidden {
+
+    .header_colored {
+        background: #FAFAFA;
         visibility: hidden;
     }
 }
@@ -22,5 +29,9 @@
     .header {
         visibility: visible;
         padding: 18px 14px;
+    }
+
+    .header_colored {
+        background: #DDDEE3;
     }
 }

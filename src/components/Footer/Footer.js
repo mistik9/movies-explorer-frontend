@@ -12,7 +12,6 @@ function Footer() {
                     <li className="footer__links-item"><a className="footer__link" href="https://github.com/mistik9" rel="noreferrer" target="_blank">Github</a></li>
                 </ul>
             </div>
-
         </footer>
     )
 }
