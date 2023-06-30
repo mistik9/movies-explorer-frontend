@@ -4,12 +4,12 @@ import Navigation from "../Navigation/Navigation";
 
 
 
-function Header({ isLoggedIn, openSideMenu, isVisible }) {
+function Header({ isColored, isLoggedIn, openSideMenu }) {
     return (
-        <header className={`header ${isVisible ? "" : "header_hidden"}`}>
+          <header className = {`header ${ isColored ? "header_colored": ""}`}>
             <Logo />
             <Navigation isLoggedIn={isLoggedIn} openSideMenu={openSideMenu}/>
-        </header>
+        </header >
     )
 }
 export default Header

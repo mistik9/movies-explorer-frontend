@@ -12,10 +12,8 @@ import "./Main.css";
 function Main({ isLoggedIn, isVisible }) {
     return (
         <div className="main">
-            <div className="main__section_gray">
-            <Header isLoggedIn={false} isVisible={false}/>
-            </div>
-            <main className="main__content">
+                <Header isLoggedIn={false} isColored={true} isVisible={false}/>
+                <main className="main__content">
                 <Promo />
                 <NavTab />
                 <AboutProject />

@@ -6,21 +6,4 @@
 
 }
 
-.main__section_gray {
-    background: #DDDEE3;
-}
-
-
-@media screen and (max-width: 1000px) {
-    .main__section_gray {
-        background: #FAFAFA;
-
-    }
-}
-@media screen and (max-width: 540px) {
-    .main__section_gray {
-        background-color: #DDDEE3;
-
-    }
-}
 

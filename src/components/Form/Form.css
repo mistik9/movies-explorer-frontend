@@ -35,12 +35,13 @@
     min-height: 46px;
     font-size: 14px;
     line-height: 17px;
+    padding: 0 15px
 }
 
 .form__input:focus {
     outline-width: 0;
-    
-   
+
+
 }
 
 .form__save {

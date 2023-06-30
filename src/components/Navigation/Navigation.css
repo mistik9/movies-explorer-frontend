@@ -13,11 +13,11 @@
 .navigation__list-item {
     list-style: none;
     position: relative;
- 
-
-}
+ }
 
 .navigation__link {
+    text-decoration: none;
+    color: #000000;
     text-decoration: none;
     color: #000000;
     font-style: normal;
@@ -30,10 +30,6 @@
     cursor: pointer;
 }
 
-.navigation__link_signup {
-    
-
-}
 
 .navigation__link_signin {
     background: #3456F3;
@@ -62,6 +58,7 @@
     background-color: #FAFAFA;
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
     border-radius: 40px;
+    min-height: 32px;
     min-height: 32px;
     width: 100px;
     font-size: 13px;
@@ -120,7 +117,7 @@
         display: none;
     }
 
-    .navigation__list_type-movie {
+    .navigation__list_movie {
         display: none;
     }
 }
@@ -134,7 +131,7 @@
     .navigation__link_signin {
         max-width: 54px;
         padding: 5px 12px;
-    }
+          }
 
     .navigation__link {
         font-size: 10px;

@@ -12,7 +12,7 @@ function Navigation({ isLoggedIn, openSideMenu, }) {
                     <Link to="/signin" className="navigation__link navigation__link_signin">Войти</Link>
                 </li>
             </ul>
-            <ul className={`navigation__list navigation__list_type-movie  ${isLoggedIn ? "" : "navigation__list_hidden"}`}>
+            <ul className={`navigation__list navigation__list_movie  ${isLoggedIn ? "" : "navigation__list_hidden"}`}>
                 <li className="navigation__list-item">
                     <Link to="/movies" className="navigation__link navigation__link_movies">Фильмы</Link>
                 </li>
