@@ -2,35 +2,36 @@ import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-function SearchForm({ onSerchMovies }) {
-    const [searchValue, setSearchValue] = React.useState("");
-    const [checked, setChecked] = React.useState(false);
+function SearchForm({allMovies, onSerchMovies }) {
+    const [serchText, setSerchText] = React.useState([]);
+    const [isShortMovie, setSiShortMovie] = React.useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
-        setChecked(e.target.checked);
-        onSerchMovies({ searchValue, checked });
+           onSerchMovies(allMovies, isShortMovie, serchText );
 
     }
     function handleChangeSearch(e) {
-        setSearchValue(e.target.value);
+        setSerchText(e.target.value);
+    
         
 
 
     }
     function handleChangeCheckBox(e) {
-          setChecked(e.target.checked) 
+        setSiShortMovie(e.target.checked) 
         
-       
+        
+
     }
 
 
     return (
         <div className="serch">
             <form className="serch__form" onSubmit={handleSubmit}>
-                <input className="serch__input" placeholder="Фильм" type="search" required value={searchValue} onChange={handleChangeSearch} />
+                <input className="serch__input" placeholder="Фильм" type="search" required value={serchText} onChange={handleChangeSearch} />
                 <button className="serch__btn" aria-label="Найти" type="submit">Найти</button>
-                <FilterCheckbox onChange={handleChangeCheckBox}  value={checked}/>
+                <FilterCheckbox onChange={handleChangeCheckBox} isShortMovie={isShortMovie}/>
             </form>
 
         </div>

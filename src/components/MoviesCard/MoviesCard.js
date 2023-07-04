@@ -3,7 +3,7 @@ import { MAIN_API_URL } from "../../utils/consts";
 import  { MOVIE_URL } from "../../utils/consts"
 
 
-function MoviesCard({ movie, isSaved, onMovieClick, onMovieSave, onSavedMovieDelete  }) {
+function MoviesCard({ movie, isSaved, onClick,  }) {
 
     function formatedDuration(duration) {
         const minutes = duration % 60;
@@ -13,11 +13,12 @@ function MoviesCard({ movie, isSaved, onMovieClick, onMovieSave, onSavedMovieDel
 
 
     function handleClick() {
-        onMovieClick(movie);
+        // onClick(movie);
       }
  
       function handleSaveClick() {
-        isSaved(movie)
+        // isSaved(movie)
+        console.log(isSaved)
       }
 
 

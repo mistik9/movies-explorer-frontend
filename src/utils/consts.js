@@ -22,6 +22,7 @@ const BAD_DATA_MOVIE_MESSAGE = 'Переданы некорректные дан
 const NOT_SIGNIN_MESSAGE = 'Необходима авторизация';
 export const SERVER_MESSAGE = 'На сервере произошла ошибка';
 const NOT_FOUND_MESSAGE = 'Cтраница не найдена';
+ 
 
 
 export const SCREEN_S = 320;
@@ -32,6 +33,20 @@ export const INDEX_SCREEN_S =5
 export const INDEX_SCREEN_M =8
 export const INDEX_SCREEN_L =12
 
-export const ADD_INDEX_SCREEN_S =3
+export const INDEX_COUNT ={
+    isScreenS: INDEX_SCREEN_S,
+    isScreenM: INDEX_SCREEN_M,
+    isScreenL: INDEX_SCREEN_L,
+}
+export const ADD_INDEX_SCREEN_S =2
 export const ADD_INDEX_SCREEN_M =2
-export const ADD_INDEX_SCREEN_L =2
+export const ADD_INDEX_SCREEN_L =3
+
+export const ADD_INDEX_COUNT = {
+    isScreenS: ADD_INDEX_SCREEN_S,
+    isScreenM: ADD_INDEX_SCREEN_M,
+    isScreenL: ADD_INDEX_SCREEN_L,
+}
+
+console.log(ADD_INDEX_COUNT)
+

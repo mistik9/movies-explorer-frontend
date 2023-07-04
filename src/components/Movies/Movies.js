@@ -13,51 +13,36 @@ function Movies({ isLoggedIn, openSideMenu, isVisible, savedMovies, onAddSavedMo
     const [currentUser, setCurrentUser] = React.useState({})
     const [allMovies, setAllMovies] = React.useState([]);
     const [isPreloader, setIsPreloader] = React.useState(false);
-    const [FoundMovies, isFoundMovies] = React.useState([]);
-
-    const [serchText, setSerchText] = React.useState([]);
-    const [isShortMovie, setSiShortMovie] = React.useState([]);
+    const [foundMovies, setFoundMovies] = React.useState([]);
 
 
 
-    function searchMovies(movies, isShortMovie, serchText) {
-        let foundMovies = movies
-         foundMovies = foundMovies.filter((movie) => movie.nameRU.tolowerCase().includes(serchText.tolowerCase()))
-   if (isShortMovie) {
-    foundMovies = foundMovies.filter((movie)=> movie.duration < 40)
-   }
-   return foundMovies
+
+    function searchMovies(allMovies, isShortMovie, serchText) {
+        let foundMovies = allMovies
+        foundMovies = foundMovies.filter((movie) => movie.nameRU.toLowerCase().includes(serchText.toLowerCase()))
+        console.log(foundMovies)
+        if (isShortMovie) {
+            foundMovies = foundMovies.filter((movie) => movie.duration < 40)
+        }
+        setAllMovies(foundMovies)
     }
 
 
     React.useEffect(() => {
+        function getMovies() {
         getMovies()
             .then((res) => {
                 setAllMovies(res)
             })
             .catch((err) => console.log(err))
+        }
+
     }, [])
 
-    // React.useEffect(() => {
-    //     loopWithSlice(0, moviesPerPage);
-    //   }, []);
 
 
-    function handleSerchMovies(serchText, isShortMovie) {
-        getMovies()
-            .then((res) => {
-                renderMovies(res)
-       })
-       .catch((err) => console.log(err))
-    }
-
-
-    function renderMovies() {
-                setAllMovies()
-           
-   }
-
-    function checkIsSaved(movie) {
+    function handleMovieClick(movie) {
         console.log(savedMovies)
         const isSaved = savedMovies.some(
             (savedMovie) => savedMovie.movieId === movie.id
@@ -69,7 +54,11 @@ function Movies({ isLoggedIn, openSideMenu, isVisible, savedMovies, onAddSavedMo
         }
     }
 
-    
+    function handleSaveMovies(movie) {
+
+    }
+
+
 
 
 
@@ -80,10 +69,11 @@ function Movies({ isLoggedIn, openSideMenu, isVisible, savedMovies, onAddSavedMo
         <div className="movies">
             <Header isLoggedIn={isLoggedIn} isVisible={true} openSideMenu={openSideMenu} />
             <main className="movies__content">
-                <SearchForm onSerchMovies={handleSerchMovies} />
-                <MoviesCardList movies={allMovies} renderMovies={renderMovies}
-                //    OnClick={handleShowMorePosts}
-                    isSaved={checkIsSaved}
+                <SearchForm allMovies={allMovies} onSerchMovies={searchMovies} />
+                <MoviesCardList
+                    movies={allMovies}
+                    savedMovies={savedMovies}
+                    onMovieClick={handleMovieClick}
                 />
             </main>
             <Footer />
