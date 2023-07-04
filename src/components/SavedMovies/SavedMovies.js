@@ -1,10 +1,16 @@
+import React from "react";
 import "./SavedMovies.css";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import SearchForm from "../SearchForm/SearchForm";;
+import SearchForm from "../SearchForm/SearchForm";
+import api from "../../utils/MainApi";
 
-function SavedMovies({ isLoggedIn, isVisible, openSideMenu }) {
+
+function SavedMovies({savedMovies,  isLoggedIn, isVisible, openSideMenu }) {
+    
+
+
     return (
         <div className="saved-movies">
             <Header isLoggedIn={true} isVisible={true} openSideMenu={openSideMenu} />

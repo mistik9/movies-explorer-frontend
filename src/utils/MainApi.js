@@ -1,4 +1,5 @@
-import { MAIN_API_URL } from "./consts"
+import { MAIN_API_URL, MOVIE_URL } from "./consts"
+
 
 class Api {
     constructor() {
@@ -18,6 +19,7 @@ class Api {
     }
 
     addMovie(data) {
+        console.log(data)
         return fetch(`${this._baseUrl}/movies`, {
             method: 'POST',
             credentials: 'include',
@@ -30,15 +32,18 @@ class Api {
                 duration: data.duration,
                 year: data.year,
                 description: data.description,
-                image: data.image,
+                image: `${MOVIE_URL}${data.image.url}`,
                 trailerLink: data.trailerLink,
-                thumbnail: data.thumbnail,
-                movieId: data.movieId,
+                thumbnail: `${MOVIE_URL}${data.image.url}`,
+                movieId: data.id,
                 nameRU: data.nameRU,
                 nameEN: data.nameEN,
             })
         })
-            .then(res => res.json())
+            .then(res => {res.json()
+            console.log(res)
+    })
+            
     }
 
     deleteMovie(_id) {
@@ -70,15 +75,15 @@ class Api {
             })
     };
 
-    authorize( email, password ) {
+    authorize(email, password) {
         return fetch(`${this._baseUrl}/signin`, {
             method: 'POST',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password} )
-                 })
+            body: JSON.stringify({ email, password })
+        })
             .then(res => res.json())
     }
 
@@ -93,7 +98,7 @@ class Api {
             .then((res) => {
                 res.json()
             })
-         
+
     }
 
     logout() {

@@ -12,7 +12,7 @@ function Register({ onRegister, isRegister }) {
         <main className="register">
             <Logo />
             <h2 className="register__title">Добро пожаловать!</h2>
-          <Form isRegister={isRegister} onSubmit={onRegister}/>
+          <Form isRegister={true} onSubmit={onRegister}/>
             <div className="register__sign-in">
                 <p className="register__sign-in-text">Уже зарегистрированы? </p>
                 <Link to="/signin" className="register__sign-in-link"> Войти</Link>

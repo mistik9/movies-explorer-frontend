@@ -12,6 +12,7 @@ import SideMenu from "../SideMenu/SideMenu";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import api from "../../utils/MainApi";
 import Popup from "../Popup/Popup";
+import { CONFLICT, CONFLICT_USER_MESSAGE, SERVER_MESSAGE } from "../../utils/consts"
 
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
     const [currentUser, setCurrentUser] = React.useState("");
     const [isPopupOpen, setIsPopupOpen] = React.useState(false);
     const [infoMessage, setInfoMessage] = React.useState({ isSuccess: false, message: "" })
+    const [savedMovies, setSavedMovies] = React.useState([]);
+
+
 
     const navigate = useNavigate()
 
@@ -60,9 +64,13 @@ function App() {
 
             })
             .catch((err) => {
-                setIsPopupOpen(true)
-                setInfoMessage({ isSuccess: false, message: "Что-то пошло не так! Попробуйте ещё раз." })
                 console.log(err)
+                if (err === CONFLICT ) {
+                setIsPopupOpen(true)
+                setInfoMessage({ isSuccess: false, message: CONFLICT_USER_MESSAGE })
+                } else 
+                setIsPopupOpen(true)
+                setInfoMessage({ isSuccess: false, message: SERVER_MESSAGE })
             })
     }
     //авторизация
@@ -119,18 +127,34 @@ function App() {
         }
     }, [isLoggedIn])
 
-      //редактирование данных профиля
-  function handleUpdateUser(data) {
-    api.updateUserData(data)
-      .then(res => {
-        setCurrentUser(res);
-        closePopup()
-        console.log(res)
-      })
-      .catch((err) => console.log(err));
-  }
+    //редактирование данных профиля
+    function handleUpdateUser(data) {
+        api.updateUserData(data)
+            .then(res => {
+                setCurrentUser(res);
+                closePopup()
+                console.log(res)
+            })
+            .catch((err) => console.log(err));
+    }
 
+    function handleAddSavedMovie(movie) {
+        api.addMovie(movie)
+            .then(res =>{
+                setSavedMovies((movies) =>[...savedMovies, res])
+            })
+            .catch((err) => console.log(err));
+        }
 
+        function handleDeleteSavedMovie(movie) {
+            api.deleteMovie(movie)
+                .then(res =>{
+                    setSavedMovies((movies) =>
+                    movies.filter((savedMovie) => savedMovie._id !== res._id),
+                )
+                })
+                .catch((err) => console.log(err));
+            }
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -147,18 +171,18 @@ function App() {
                         <Main isLoggedIn={isLoggedIn} />
                     } />
                     <Route path="/movies" element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<Movies isLoggedIn={isLoggedIn} />}
+                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<Movies isLoggedIn={isLoggedIn} openSideMenu={openSideMenu} savedMovies={savedMovies} onDeleteSavedMovie={handleDeleteSavedMovie} onAddSavedMovie={handleAddSavedMovie} />}
                         />
                     } />
-                     <Route path="/saved-movies" element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<SavedMovies isLoggedIn={isLoggedIn} />}
+                    <Route path="/saved-movies" element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<SavedMovies isLoggedIn={isLoggedIn} savedMovies={savedMovies} />}
                         />
                     } />
-                              <Route path="/profile" element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<Profile isLoggedIn={isLoggedIn} onLogout={handleLogOut} onUpdateUser={handleUpdateUser}/>}
+                    <Route path="/profile" element={
+                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<Profile isLoggedIn={isLoggedIn} onLogout={handleLogOut} onUpdateUser={handleUpdateUser} />}
                         />
                     } />
-                       </Routes>
+                </Routes>
                 <SideMenu isOpen={isSideMenuOpen} onClose={closeSideMenu} />
                 <Popup isOpen={isPopupOpen} message={infoMessage.message} isSuccess={infoMessage.isSuccess} onClose={closePopup} />
             </div>
