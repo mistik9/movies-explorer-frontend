@@ -1,4 +1,4 @@
-export const MOVIE_URL= "https://api.nomoreparties.co/";
+export const MOVIE_URL= "https://api.nomoreparties.co";
 // export const MAIN_API_URL = "https://hollysht.nomoredomains.rocks/api";
  export const MAIN_API_URL ="http://localhost:3001";
 
@@ -48,5 +48,5 @@ export const ADD_INDEX_COUNT = {
     isScreenL: ADD_INDEX_SCREEN_L,
 }
 
-console.log(ADD_INDEX_COUNT)
+
 

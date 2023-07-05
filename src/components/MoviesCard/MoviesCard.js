@@ -3,7 +3,7 @@ import { MAIN_API_URL } from "../../utils/consts";
 import  { MOVIE_URL } from "../../utils/consts"
 
 
-function MoviesCard({ movie, isSaved, onClick,  }) {
+function MoviesCard({ movie, isSaved, onClick  }) {
 
     function formatedDuration(duration) {
         const minutes = duration % 60;
@@ -13,23 +13,20 @@ function MoviesCard({ movie, isSaved, onClick,  }) {
 
 
     function handleClick() {
-        // onClick(movie);
+  onClick(movie);
+    
       }
  
-      function handleSaveClick() {
-        // isSaved(movie)
-        console.log(isSaved)
-      }
-
+  
 
     
 
     return (
         <li className="movies-card">
             <h3 className="movies-card__title">{movie.nameRU}</h3>
-            <button className={`movies-card__save-btn ${ isSaved ? "movies-card__save-btn_active" :""}`} type="button" onClick={isSaved ?  handleSaveClick: ''} ></button>
+            <button className={`movies-card__save-btn ${ isSaved ? "movies-card__save-btn_active" :""}`} type="button" onClick={handleClick} ></button>
             <p className="movies-card__duration">{formatedDuration(movie.duration)}</p>
-            <img className="movies-card__img" src={`${MOVIE_URL}${movie.image.url}`} alt="Постер к фильму" onClick={handleClick}></img>
+            <img className="movies-card__img" src={`${MOVIE_URL}${movie.image}`} alt="Постер к фильму" ></img>
 
         </li>
 

@@ -38,10 +38,12 @@ class Api {
                 movieId: data.id,
                 nameRU: data.nameRU,
                 nameEN: data.nameEN,
+              
             })
         })
             .then(res => {res.json()
-            console.log(res)
+   
+            
     })
             
     }

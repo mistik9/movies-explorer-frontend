@@ -27,8 +27,6 @@ function App() {
     const [infoMessage, setInfoMessage] = React.useState({ isSuccess: false, message: "" })
     const [savedMovies, setSavedMovies] = React.useState([]);
 
-
-
     const navigate = useNavigate()
 
     //открытие закрытие сайдменю
@@ -65,11 +63,11 @@ function App() {
             })
             .catch((err) => {
                 console.log(err)
-                if (err === CONFLICT ) {
-                setIsPopupOpen(true)
-                setInfoMessage({ isSuccess: false, message: CONFLICT_USER_MESSAGE })
-                } else 
-                setIsPopupOpen(true)
+                if (err === CONFLICT) {
+                    setIsPopupOpen(true)
+                    setInfoMessage({ isSuccess: false, message: CONFLICT_USER_MESSAGE })
+                } else
+                    setIsPopupOpen(true)
                 setInfoMessage({ isSuccess: false, message: SERVER_MESSAGE })
             })
     }
@@ -93,8 +91,8 @@ function App() {
             .then((data) => {
                 if (data) {
                     setIsloggedIn(true);
-                    console.log(data)
                     navigate("/movies", { replace: true })
+                    getSavedMovies()
                 }
             })
             .catch((err) => {
@@ -102,6 +100,16 @@ function App() {
             })
     }
 
+
+    function getSavedMovies() {
+        api.getMovies()
+            .then((res) => {
+                setSavedMovies(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
     React.useEffect(() => {
         handleTokenCheck();
@@ -140,21 +148,33 @@ function App() {
 
     function handleAddSavedMovie(movie) {
         api.addMovie(movie)
-            .then(res =>{
-                setSavedMovies((movies) =>[...savedMovies, res])
+            .then(res => {
+                setSavedMovies((movies) => [...savedMovies, res])
+
             })
             .catch((err) => console.log(err));
-        }
+    }
 
-        function handleDeleteSavedMovie(movie) {
-            api.deleteMovie(movie)
-                .then(res =>{
-                    setSavedMovies((movies) =>
+    function handleDeleteSavedMovie(movie) {
+        api.deleteMovie(movie)
+            .then(res => {
+                setSavedMovies((movies) =>
                     movies.filter((savedMovie) => savedMovie._id !== res._id),
                 )
-                })
-                .catch((err) => console.log(err));
-            }
+            })
+            .catch((err) => console.log(err));
+    }
+
+
+    function handleMovieClick(movie) {
+        console.log(movie)
+               const isSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id) 
+        if (isSaved) {
+            handleDeleteSavedMovie(movie)
+        } else {
+            handleAddSavedMovie(movie)
+        }
+    }
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -171,11 +191,11 @@ function App() {
                         <Main isLoggedIn={isLoggedIn} />
                     } />
                     <Route path="/movies" element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<Movies isLoggedIn={isLoggedIn} openSideMenu={openSideMenu} savedMovies={savedMovies} onDeleteSavedMovie={handleDeleteSavedMovie} onAddSavedMovie={handleAddSavedMovie} />}
+                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<Movies isLoggedIn={isLoggedIn} openSideMenu={openSideMenu} savedMovies={savedMovies} onMovieClick={handleMovieClick} />}
                         />
                     } />
                     <Route path="/saved-movies" element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<SavedMovies isLoggedIn={isLoggedIn} savedMovies={savedMovies} />}
+                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<SavedMovies isLoggedIn={isLoggedIn} savedMovies={savedMovies} openSideMenu={openSideMenu} onMovieClick={handleMovieClick} />}
                         />
                     } />
                     <Route path="/profile" element={

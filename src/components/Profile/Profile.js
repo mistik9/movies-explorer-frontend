@@ -12,7 +12,6 @@ function Profile({ onUpdateUser, isLoggedIn, onLogOut, isVisible }) {
         const [name, setName] = React.useState(currentUser.name);
     const [email, setEmail] = React.useState(currentUser.email);
 
-    console.log(currentUser.name)
 
     React.useEffect(() => {
         setName(currentUser.name || "");

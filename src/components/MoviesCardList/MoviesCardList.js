@@ -55,10 +55,10 @@ function MoviesCardList({ movies, onMovieClick, savedMovies }) {
         }
     }
 
-    function checkIsMovieSaved(movie) {
-        return savedMovies.some((savedMovie) => savedMovie.movieId === movie.movieId);
-        console.log(1)
-      }
+    // function checkIsMovieSaved(movie) {
+    //     return savedMovies.some((savedMovie) => savedMovie.movieId === movie.Id);
+        
+    //   }
 
     return (
         <section className="card-list">
@@ -68,13 +68,12 @@ function MoviesCardList({ movies, onMovieClick, savedMovies }) {
                     <MoviesCard
                         key={movie.movieId}
                         duration={movie.duration}
-                        image={movie.image.url}
+                        image={movie.image}
                         name={movie.nameRU}
                         movie={movie}
                         trailer={movie.trailerLink}
                         onClick={onMovieClick}
-                        isSaved={checkIsMovieSaved(movie)}
-
+                        
                     />
 
                 )}
