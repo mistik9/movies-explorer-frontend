@@ -19,7 +19,6 @@ class Api {
     }
 
     addMovie(data) {
-        console.log(data)
         return fetch(`${this._baseUrl}/movies`, {
             method: 'POST',
             credentials: 'include',
@@ -41,22 +40,18 @@ class Api {
               
             })
         })
-            .then(res => {res.json()
-   
-            
-    })
+            .then(res => res.json())
             
     }
 
-    deleteMovie(_id) {
-        return fetch(`${this._baseUrl}/movies/${_id}`, {
+    deleteMovie(movie) {
+        return fetch(`${this._baseUrl}/movies/${movie._id}`, {
             method: 'DELETE',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-            .then(res => res.json())
+        }).then(res => res.json())
     }
 
     register({ email, password, name }) {
@@ -97,9 +92,7 @@ class Api {
                 'Content-Type': 'application/json'
             }
         })
-            .then((res) => {
-                res.json()
-            })
+            .then((res) => res.json())
 
     }
 

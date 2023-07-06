@@ -2,6 +2,7 @@ import React from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import api from "../../utils/MainApi";
@@ -27,50 +28,33 @@ function Movies({ isLoggedIn, openSideMenu, isVisible, savedMovies, onMovieClick
         getAllMovies()
 
     }, [])
- 
-    console.log(allMovies)
-  
-    function searchMovies(allMovies, isShortMovie, serchText) {
-        let foundMovies = allMovies
-        
-        foundMovies = foundMovies.filter((movie) => movie.nameRU.toLowerCase().includes(serchText.toLowerCase()))
 
+    function searchMovies({allMovies, isShortMovie, serchText})  {
+        let foundMovies = allMovies;
+       
+        foundMovies = foundMovies.filter((movie) => movie.nameRU.toLowerCase().includes(serchText.toLowerCase()));
         if (isShortMovie) {
             foundMovies = foundMovies.filter((movie) => movie.duration < 40)
         }
-        setAllMovies(foundMovies)
+        setAllMovies(foundMovies);
     }
-
-    // function handleMovieClick(movie) {
-       
-    //     const isSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id) 
-    //     if (isSaved) {
-    //         onDeleteSavedMovie(movie)
-    //     } else {
-    //         onAddSavedMovie(movie)
-    //     }
-    // }
-
-    function handleSaveMovies(movie) {
-
-    }
-
-
-
-
-
 
 
     return (
         <div className="movies">
-            <Header isLoggedIn={isLoggedIn} isVisible={true} openSideMenu={openSideMenu} />
+            <Header
+                isLoggedIn={isLoggedIn}
+                isVisible={true}
+                openSideMenu={openSideMenu} />
             <main className="movies__content">
-                <SearchForm allMovies={allMovies} onSerchMovies={searchMovies} />
+                <SearchForm
+                    allMovies={allMovies}
+                    onSerchMovies={searchMovies} />
                 <MoviesCardList
                     movies={allMovies}
-                    savedMovies={savedMovies}
                     onMovieClick={onMovieClick}
                 />
+
             </main>
             <Footer />
         </div>

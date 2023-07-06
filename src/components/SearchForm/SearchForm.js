@@ -6,9 +6,10 @@ function SearchForm({allMovies, onSerchMovies }) {
     const [serchText, setSerchText] = React.useState([]);
     const [isShortMovie, setSiShortMovie] = React.useState(false);
 
+    
     function handleSubmit(e) {
         e.preventDefault();
-           onSerchMovies(allMovies, isShortMovie, serchText );
+        onSerchMovies({allMovies, isShortMovie, serchText});
 
     }
     function handleChangeSearch(e) {

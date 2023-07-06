@@ -11,18 +11,16 @@ import {
 
 } from "../../utils/consts";
 
-function MoviesCardList({ movies, onMovieClick, savedMovies }) {
+function MoviesCardList({ movies, onMovieClick, savedMovies, isSavedMovies }) {
     const { width, isScreenS, isScreenM, isScreenL, } = useResize();
 
     const [isCompleted, setIsCompleted] = React.useState(false)
-    const [index, setIndex] = React.useState(XZ())
-    const [addIndex, setAddIndex] = React.useState(ZX())
+    const [index, setIndex] = React.useState(renderMoviesCards())
+    const [addIndex, setAddIndex] = React.useState(addMovieCards())
 
     const initialMovies = movies.slice(0, index)
 
-
-
-    function XZ() {
+    function renderMoviesCards() {
         if (isScreenL) {
             return INDEX_SCREEN_L;
         } else if (isScreenM) {
@@ -31,21 +29,15 @@ function MoviesCardList({ movies, onMovieClick, savedMovies }) {
             return INDEX_SCREEN_S;
         }
     }
-    function ZX() {
+    function addMovieCards() {
         if (isScreenS) {
             return ADD_INDEX_SCREEN_S;
         } else
             return ADD_INDEX_SCREEN_L;
     }
 
-
-    // console.log(index)
-    // console.log(isScreenL)
-    // console.log(addIndex)
-
-
     const loadMore = () => {
-        setAddIndex(ZX())
+        setAddIndex(addIndex)
         setIndex(index + addIndex)
 
         if (index >= movies.length) {
@@ -55,10 +47,10 @@ function MoviesCardList({ movies, onMovieClick, savedMovies }) {
         }
     }
 
-    // function checkIsMovieSaved(movie) {
-    //     return savedMovies.some((savedMovie) => savedMovie.movieId === movie.Id);
+    function checkIsMovieSaved (movie) {
+        return savedMovies.some((savedMovie) => savedMovie.movieId === movie.id)
         
-    //   }
+      }
 
     return (
         <section className="card-list">
@@ -67,19 +59,14 @@ function MoviesCardList({ movies, onMovieClick, savedMovies }) {
                 {initialMovies.map((movie) =>
                     <MoviesCard
                         key={movie.movieId}
-                        duration={movie.duration}
-                        image={movie.image}
-                        name={movie.nameRU}
                         movie={movie}
-                        trailer={movie.trailerLink}
                         onClick={onMovieClick}
-                        
+                        isSaved={checkIsMovieSaved}
+                        isSavedMovies={isSavedMovies}
                     />
-
                 )}
-
             </ul>
-            {!isCompleted ? (<button className="card-list__btn" type="button" onClick={loadMore}>Еще</button>) : ""}
+            {!isCompleted ? (<button className={`card-list__btn ${isSavedMovies ?"card-list__btn_hidden" :""}`} type="button" onClick={loadMore}>Еще</button>) : ""}
         </section>
     )
 }

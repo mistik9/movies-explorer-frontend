@@ -18,6 +18,7 @@ import { CONFLICT, CONFLICT_USER_MESSAGE, SERVER_MESSAGE } from "../../utils/con
 function App() {
     const [isRegister, setIsRegister] = React.useState(false);
     const [isLoggedIn, setIsloggedIn] = React.useState(false);
+    const [isSavedMovies, setIsSavedMovies] = React.useState(false);
     const [isSideMenuOpen, setIsSidemenuOpen] = React.useState(false);
     const [isVisible, setIsVisible] = React.useState(true);
     const [isLoading, setIsLoading] = React.useState(false);
@@ -100,10 +101,11 @@ function App() {
             })
     }
 
-
+// загрузка сохраненных фильмов
     function getSavedMovies() {
         api.getMovies()
             .then((res) => {
+                console.log(res);
                 setSavedMovies(res)
             })
             .catch((err) => {
@@ -141,22 +143,23 @@ function App() {
             .then(res => {
                 setCurrentUser(res);
                 closePopup()
-                console.log(res)
+
             })
             .catch((err) => console.log(err));
     }
 
+    // добавить в сохраненные
     function handleAddSavedMovie(movie) {
         api.addMovie(movie)
             .then(res => {
-                setSavedMovies((movies) => [...savedMovies, res])
-
+                setSavedMovies(() => [...savedMovies, res])
             })
             .catch((err) => console.log(err));
     }
 
-    function handleDeleteSavedMovie(movie) {
-        api.deleteMovie(movie)
+    //удалить из сохраненных
+    function handleDeleteSavedMovie(_id) {
+        api.deleteMovie(_id)
             .then(res => {
                 setSavedMovies((movies) =>
                     movies.filter((savedMovie) => savedMovie._id !== res._id),
@@ -167,10 +170,11 @@ function App() {
 
 
     function handleMovieClick(movie) {
-        console.log(movie)
-               const isSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id) 
+        const isSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id)
         if (isSaved) {
-            handleDeleteSavedMovie(movie)
+            const savedMovie = savedMovies.find(
+                (savedMovie) => savedMovie.movieId === movie.id)
+            handleDeleteSavedMovie(savedMovie)
         } else {
             handleAddSavedMovie(movie)
         }
@@ -191,20 +195,43 @@ function App() {
                         <Main isLoggedIn={isLoggedIn} />
                     } />
                     <Route path="/movies" element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<Movies isLoggedIn={isLoggedIn} openSideMenu={openSideMenu} savedMovies={savedMovies} onMovieClick={handleMovieClick} />}
+                        <ProtectedRoute
+                            isLoggedIn={isLoggedIn} element={<Movies
+                                isLoggedIn={isLoggedIn}
+                                openSideMenu={openSideMenu}
+                                savedMovies={savedMovies}
+                                onMovieClick={handleMovieClick}
+
+                            />}
                         />
                     } />
                     <Route path="/saved-movies" element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<SavedMovies isLoggedIn={isLoggedIn} savedMovies={savedMovies} openSideMenu={openSideMenu} onMovieClick={handleMovieClick} />}
+                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<SavedMovies
+                            isLoggedIn={isLoggedIn}
+                            isSavedMovies={true}
+                            savedMovies={savedMovies}
+                            openSideMenu={openSideMenu}
+                            onMovieClick={handleMovieClick}
+
+                        />}
                         />
                     } />
                     <Route path="/profile" element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<Profile isLoggedIn={isLoggedIn} onLogout={handleLogOut} onUpdateUser={handleUpdateUser} />}
+                        <ProtectedRoute isLoggedIn={isLoggedIn} element={<Profile
+                            isLoggedIn={isLoggedIn}
+                            onLogout={handleLogOut}
+                            onUpdateUser={handleUpdateUser} />}
                         />
                     } />
                 </Routes>
-                <SideMenu isOpen={isSideMenuOpen} onClose={closeSideMenu} />
-                <Popup isOpen={isPopupOpen} message={infoMessage.message} isSuccess={infoMessage.isSuccess} onClose={closePopup} />
+                <SideMenu
+                    isOpen={isSideMenuOpen}
+                    onClose={closeSideMenu} />
+                <Popup
+                    isOpen={isPopupOpen}
+                    message={infoMessage.message}
+                    isSuccess={infoMessage.isSuccess}
+                    onClose={closePopup} />
             </div>
         </CurrentUserContext.Provider>
     )

@@ -7,7 +7,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import api from "../../utils/MainApi";
 
 
-function SavedMovies({ savedMovies, onMovieClick, searchMovies, openSideMenu }) {
+function SavedMovies({ savedMovies,isSavedMovies, onMovieClick, searchMovies, openSideMenu }) {
 
     const [allSavedMovies, setAllSavedMovies] = React.useState([])
 
@@ -28,13 +28,18 @@ function SavedMovies({ savedMovies, onMovieClick, searchMovies, openSideMenu }) 
 
     return (
         <div className="saved-movies">
-            <Header isLoggedIn={true} isVisible={true} openSideMenu={openSideMenu} />
+            <Header
+                isLoggedIn={true}
+                isVisible={true}
+                openSideMenu={openSideMenu} />
             <main className="saved-movies__container">
-                <SearchForm onSerchMovies={searchMovies} />
+                <SearchForm
+                    allSavedMovies={allSavedMovies}
+                    onSerchMovies={searchMovies} />
                 <MoviesCardList
                     movies={allSavedMovies}
-                    savedMovies={savedMovies}
                     onMovieClick={onMovieClick}
+                    isSavedMovies={isSavedMovies}
                 />
             </main>
             <Footer />
