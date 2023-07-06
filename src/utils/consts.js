@@ -1,27 +1,16 @@
 export const MOVIE_URL= "https://api.nomoreparties.co";
 // export const MAIN_API_URL = "https://hollysht.nomoredomains.rocks/api";
  export const MAIN_API_URL ="http://localhost:3001";
-
- const OK = 200;
- const BAD_REQUEST = 400;
- const UNAUTHORIZED = 401;
- const FORBIDDEN = 403;
- const NOT_FOUND = 404;
  export const CONFLICT = 409;
- const INTERNAL_SERVER = 500;
 
- const NOT_FOUND_USER_MESSAGE = 'Пользователь не найден';
-const BAD_DATA_USER_MESSAGE = 'Переданы некорректные данные';
-export const CONFLICT_USER_MESSAGE = 'Пользователь с таким электронным адресом уже зарегистрирован';
-const SIGNIN_MESSAGE = 'Пользователь авторизован';
-const CLEAR_COOKIE_MESSAGE = 'Cookies удалены';
-const NOT_FOUND_MOVIE_MESSAGE = 'Нет такого фильма';
-const DEL_MOVIE_MESSAGE = 'Фильм удален';
-const FORBIDDEN_MOVIE_MESSAGE = 'Нельзя удалить фильм не из вашей коллекции';
-const BAD_DATA_MOVIE_MESSAGE = 'Переданы некорректные данные';
-const NOT_SIGNIN_MESSAGE = 'Необходима авторизация';
-export const SERVER_MESSAGE = 'На сервере произошла ошибка';
-const NOT_FOUND_MESSAGE = 'Cтраница не найдена';
+ export const SMT_WENT_WRONG = "Что-то пошло не так! Попробуйте ещё раз."
+ const NOT_FOUND_USER_MESSAGE = "Пользователь не найден";
+const BAD_DATA_USER_MESSAGE = "Переданы некорректные данные";
+export const CONFLICT_USER_MESSAGE = "Пользователь с таким электронным адресом уже зарегистрирован";
+export const SIGNUP_MESSAGE = "Вы успешно зарегистрировались!";
+export const UPDATE_USER_DATA = "Данные пользователя обновлены"
+export const SERVER_MESSAGE = "На сервере произошла ошибка";
+export const NOT_FOUND_MESSAGE = "Cтраница не найдена";
  
 
 

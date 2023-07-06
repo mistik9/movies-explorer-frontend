@@ -1,7 +1,7 @@
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import { Route, Routes, useNavigate, Navigate, Switch } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import React from "react";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Profile from "../Profile/Profile";
@@ -12,7 +12,7 @@ import SideMenu from "../SideMenu/SideMenu";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import api from "../../utils/MainApi";
 import Popup from "../Popup/Popup";
-import { CONFLICT, CONFLICT_USER_MESSAGE, SERVER_MESSAGE } from "../../utils/consts"
+import { CONFLICT, CONFLICT_USER_MESSAGE, SERVER_MESSAGE, SMT_WENT_WRONG, SIGNUP_MESSAGE, UPDATE_USER_DATA } from "../../utils/consts"
 
 
 function App() {
@@ -44,23 +44,16 @@ function App() {
         setIsPopupOpen(false);
     }
 
-    //сообщение при регистрации
-    function handleShowInfoMessage(message) {
-        setInfoMessage(message)
-    }
-
     //регистрация
     function handleRegister({ email, password, name }) {
         api.register({ email, password, name })
             .then((res) => {
                 if (!res.error)
                     setIsPopupOpen(true)
-                setInfoMessage({ isSuccess: true, message: "Вы успешно зарегистрировались!" })
+                setInfoMessage({ isSuccess: true, message: SIGNUP_MESSAGE })
                 setIsloggedIn(true)
                 navigate("/movies", { replace: true });
                 setUserData(res.user);
-
-
             })
             .catch((err) => {
                 console.log(err)
@@ -69,11 +62,12 @@ function App() {
                     setInfoMessage({ isSuccess: false, message: CONFLICT_USER_MESSAGE })
                 } else
                     setIsPopupOpen(true)
-                setInfoMessage({ isSuccess: false, message: SERVER_MESSAGE })
+                setInfoMessage({ isSuccess: false, message: SMT_WENT_WRONG })
             })
     }
     //авторизация
     function handleLogin({ email, password }) {
+
         api.authorize(email, password)
             .then((res) => {
                 setIsloggedIn(true);
@@ -81,9 +75,12 @@ function App() {
                 setUserData(res.user);
             })
             .catch((err) => {
+
+                setIsloggedIn(false);
                 setIsPopupOpen(true)
-                setInfoMessage({ isSuccess: false, message: "Что-то пошло не так! Попробуйте ещё раз." })
+                setInfoMessage({ isSuccess: false, message: SMT_WENT_WRONG })
                 console.log(err)
+            
             })
     }
     //проверка токена
@@ -97,30 +94,43 @@ function App() {
                 }
             })
             .catch((err) => {
+
+                setIsPopupOpen(true)
+                setInfoMessage({ isSuccess: false, message: SMT_WENT_WRONG })
                 console.log(err)
             })
     }
 
-// загрузка сохраненных фильмов
+    // загрузка сохраненных фильмов
     function getSavedMovies() {
+        setIsLoading()
         api.getMovies()
             .then((res) => {
-                console.log(res);
                 setSavedMovies(res)
             })
             .catch((err) => {
+                setIsPopupOpen(true)
+                setInfoMessage({ isSuccess: false, message: SMT_WENT_WRONG })
                 console.log(err)
+            })
+            .finally(() => {
+                setIsLoading(false)
             })
     }
 
-    React.useEffect(() => {
-        handleTokenCheck();
-    }, [])
+    // React.useEffect(() => {
+    //     handleTokenCheck();
+    // }, [])
 
     //выйти
     function handleLogOut() {
-        setIsloggedIn(false);
-        setUserData({});
+        api.logout()
+            .then(() => {
+                navigate("/movies", { replace: true })
+                setIsloggedIn(false);
+                setUserData({});
+            })
+            .then((res) => res.json())
 
     }
 
@@ -142,10 +152,15 @@ function App() {
         api.updateUserData(data)
             .then(res => {
                 setCurrentUser(res);
-                closePopup()
+                setIsPopupOpen(true)
+                setInfoMessage({ isSuccess: true, message: UPDATE_USER_DATA })
 
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                setIsPopupOpen(true)
+                setInfoMessage({ isSuccess: false, message: SMT_WENT_WRONG })
+                console.log(err)
+            });
     }
 
     // добавить в сохраненные
@@ -165,11 +180,16 @@ function App() {
                     movies.filter((savedMovie) => savedMovie._id !== res._id),
                 )
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                setIsPopupOpen(true)
+                setInfoMessage({ isSuccess: false, message: SMT_WENT_WRONG })
+                console.log(err);
+            })
     }
 
 
     function handleMovieClick(movie) {
+        console.log(savedMovies)
         const isSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id)
         if (isSaved) {
             const savedMovie = savedMovies.find(
@@ -208,6 +228,7 @@ function App() {
                     <Route path="/saved-movies" element={
                         <ProtectedRoute isLoggedIn={isLoggedIn} element={<SavedMovies
                             isLoggedIn={isLoggedIn}
+                            isLoading={isLoading}
                             isSavedMovies={true}
                             savedMovies={savedMovies}
                             openSideMenu={openSideMenu}

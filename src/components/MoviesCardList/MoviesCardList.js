@@ -10,8 +10,9 @@ import {
     ADD_INDEX_SCREEN_L,
 
 } from "../../utils/consts";
+import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList({ movies, onMovieClick, savedMovies, isSavedMovies }) {
+function MoviesCardList({ movies, isLoading, onMovieClick, savedMovies, isSavedMovies }) {
     const { width, isScreenS, isScreenM, isScreenL, } = useResize();
 
     const [isCompleted, setIsCompleted] = React.useState(false)
@@ -54,6 +55,9 @@ function MoviesCardList({ movies, onMovieClick, savedMovies, isSavedMovies }) {
 
     return (
         <section className="card-list">
+            <Preloader 
+             isLoading={isLoading}
+            />
             <ul className="card-list__list">
 
                 {initialMovies.map((movie) =>

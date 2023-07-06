@@ -7,7 +7,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import api from "../../utils/MainApi";
 
 
-function SavedMovies({ savedMovies,isSavedMovies, onMovieClick, searchMovies, openSideMenu }) {
+function SavedMovies({ savedMovies,isSavedMovies,isLoading, onMovieClick, searchMovies, openSideMenu }) {
 
     const [allSavedMovies, setAllSavedMovies] = React.useState([])
 
@@ -38,6 +38,8 @@ function SavedMovies({ savedMovies,isSavedMovies, onMovieClick, searchMovies, op
                     onSerchMovies={searchMovies} />
                 <MoviesCardList
                     movies={allSavedMovies}
+                    isLoading={isLoading}
+                    // movies={savedMovies}
                     onMovieClick={onMovieClick}
                     isSavedMovies={isSavedMovies}
                 />

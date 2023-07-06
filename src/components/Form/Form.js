@@ -1,35 +1,20 @@
 import React from "react";
 import "../Form/Form.css";
+import { useFormWithValidation } from "../../utils/useForm";
 
 
 function Form({ isRegister, onSubmit }) {
-    // const [email, setEmail] = React.useState("");
-    // const [password, setPassword] = React.useState("");
-    // const [name, setName] = React.useState("");
-
 
     function handleSubmit(e) {
         e.preventDefault();
         onSubmit(values)
 
     }
+    const { values, errors, isValid, handleChange } = useFormWithValidation()
 
-    const [values, setValues] = React.useState({});
-    const [errors, setErrors] = React.useState({});
-    const [isValid, setIsValid] = React.useState(false);
-
-
-    const handleChange = (event) => {
-        const target = event.target;
-        const name = target.name;
-        const value = target.value;
-        setValues({ ...values, [name]: value });
-        setErrors({ ...errors, [name]: target.validationMessage });
-        setIsValid(target.closest("form").checkValidity());
-    };
 
     return (
-        <form className="form" isValid={isValid} novalidate  onSubmit={handleSubmit}>
+        <form className="form" isValid={isValid}  onSubmit={handleSubmit}>
             {isRegister ? (
                 <label className="form-label">Имя
                     <input type="name"
@@ -54,7 +39,7 @@ function Form({ isRegister, onSubmit }) {
                     className="form__input form__input_type_email"
                     minLength="2"
                     maxLength="40" />
-                <span id="email-error" className="form__error">{errors.email} {errors.email === 'Введите данные в указанном формате.' ? 'username@hostname': ''}</span>
+                <span id="email-error" className="form__error">{errors.email} {errors.email === 'Введите данные в указанном формате.' ? 'username@hostname' : ''}</span>
             </label>
             <label className="form-label">пароль
                 <input type="password"
