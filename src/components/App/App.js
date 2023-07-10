@@ -123,15 +123,15 @@ function App() {
     // }, [])
 
     //выйти
-    function handleLogOut() {
+    function handleLogout() {
+        console.log(1)
         api.logout()
             .then(() => {
-                navigate("/movies", { replace: true })
+                navigate("/", { replace: true })
                 setIsloggedIn(false);
                 setUserData({});
             })
-            .then((res) => res.json())
-
+            .catch((err) => console.log(err))
     }
 
     //загрузка данных о пользователе 
@@ -141,9 +141,7 @@ function App() {
                 .then((userData) => {
                     setCurrentUser(userData)
                 })
-                .catch((err) => {
-                    console.log(err)
-                })
+                .catch((err) => console.log(err))
         }
     }, [isLoggedIn])
 
@@ -174,6 +172,7 @@ function App() {
 
     //удалить из сохраненных
     function handleDeleteSavedMovie(_id) {
+        console.log(_id)
         api.deleteMovie(_id)
             .then(res => {
                 setSavedMovies((movies) =>
@@ -189,7 +188,6 @@ function App() {
 
 
     function handleMovieClick(movie) {
-        console.log(savedMovies)
         const isSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id)
         if (isSaved) {
             const savedMovie = savedMovies.find(
@@ -240,7 +238,7 @@ function App() {
                     <Route path="/profile" element={
                         <ProtectedRoute isLoggedIn={isLoggedIn} element={<Profile
                             isLoggedIn={isLoggedIn}
-                            onLogout={handleLogOut}
+                            onLogout={handleLogout}
                             onUpdateUser={handleUpdateUser} />}
                         />
                     } />

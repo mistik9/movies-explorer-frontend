@@ -18,7 +18,7 @@ function Movies({ isLoggedIn, openSideMenu, isVisible, savedMovies, onMovieClick
     const [responseMessage, setResponseMessage] = React.useState("");
     const [isNoMovies, setIsNoMovies] = React.useState(false);
 
-console.log(isNoMovies)
+
     function getAllMovies() {
         setIsLoading()
         getMovies()
