@@ -21,3 +21,6 @@
 
 ## Ссылка на макет Figma:
 https://disk.yandex.ru/d/2eu3KiE3QA33Yw
+
+## Ссылка Pull request
+https://github.com/mistik9/movies-explorer-frontend/pull/2
