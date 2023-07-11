@@ -1,0 +1,18 @@
+.section-title {
+    font-family: "Inter", "Arial", "sans-serif";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    margin-bottom: 23px;
+}
+
+@media screen and (max-width: 540px) {
+    .section-title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        margin-bottom: 28px;
+        margin-top: 0;
+    }
+}

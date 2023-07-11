@@ -1,0 +1,138 @@
+.navigation__list {
+    font-family: "Inter", "Arial", "sans-serif";
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.navigation__list_hidden {
+    display: none;
+}
+
+.navigation__list-item {
+    list-style: none;
+    position: relative;
+ }
+
+.navigation__link {
+    text-decoration: none;
+    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    cursor: pointer;
+}
+
+
+.navigation__link_signin {
+    background: #3456F3;
+    border-radius: 3px;
+    color: #FFFFFF;
+    max-width: 76px;
+    padding: 8px 20px;
+    margin: 3px 0 3px 30px;
+}
+
+.navigation__link_movies {
+    font-size: 14px;
+    line-height: 18px;
+    text-align: right;
+    font-weight: 500;
+}
+
+.navigation__link_saved-movies {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    margin-left: 20px;
+}
+
+.navigation__link_profile {
+    background-color: #FAFAFA;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 40px;
+    min-height: 32px;
+    width: 100px;
+    font-size: 13px;
+    line-height: 12px;
+    margin-left: 50px;
+    box-sizing: border-box;
+    padding: 0 0 0 11px;
+}
+
+.navigation__icon_profile {
+    position: absolute;
+    top:3px;
+    right: 3px;
+    margin-left: 15px;
+    border-radius: 50px;
+    width: 26px;
+    height: 26px;
+    background-image: url(../../images/profile-icon.svg);
+    background-color: #F4F4F4;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.navigation__menu {
+    border: none;
+    outline: none;
+    display: flex;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation__menu_hidden {
+    display: none;
+}
+
+.navigation__menu-line {
+    display: none;
+    margin: 0 8px 07px;
+    cursor: pointer;
+    border-bottom: 3px solid #000000;
+    width: 28px;
+}
+
+@media screen and (max-width: 1000px) {
+    .navigation__menu-line {
+        display: block;
+    }
+
+    .navigation__menu {
+        display: block;
+    }
+
+    .navigation__menu_hidden {
+        display: none;
+    }
+
+    .navigation__list_movie {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .navigation__menu-line {
+        border-bottom: 2px solid #000000;
+        width: 23px;
+    }
+
+    .navigation__link_signin {
+        max-width: 54px;
+        padding: 5px 12px;
+    }
+
+    .navigation__link {
+        font-size: 10px;
+        margin: 3px 0 3px 14px;
+        line-height: 16px;
+    }
+}

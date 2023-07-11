@@ -1,0 +1,47 @@
+.nav-tab {
+    font-family: "Inter", "Arial", "sans-serif";
+    min-height: 66px;
+    background-color: #F5F5F5;
+
+}
+
+.nav-tab__menu {
+    display: flex;
+    justify-content: center;
+    text-decoration-line: underline;
+    margin: 0;
+    padding: 24px 0 24px 0;
+
+}
+
+.nav-tab__menu-item {
+    list-style: none;
+    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    margin-left: 40px;
+    cursor: pointer;
+}
+
+.nav-tab__menu-item:first-child {
+    margin: 0;
+}
+
+@media screen and (max-width: 1000px) {
+    .nav-tab {
+        visibility: hidden;
+    }
+}
+@media screen and (max-width: 540px) {
+    .nav-tab {
+        visibility: visible;
+    }
+    .nav-tab__menu-item {
+         font-size: 11px;
+         margin-left: 24px;
+         
+
+        }
+}
