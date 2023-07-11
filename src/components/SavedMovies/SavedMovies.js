@@ -4,45 +4,52 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
-import api from "../../utils/MainApi";
+import Preloader from "../Preloader/Preloader";
+import Response from "../Response/Response";
 
 
-function SavedMovies({ savedMovies,isSavedMovies,isLoading, onMovieClick, searchMovies, openSideMenu }) {
+function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick, openSideMenu, isLoggedIn }) {
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [responseMessage, setResponseMessage] = React.useState("");
+    const [isNoMovies, setIsNoMovies] = React.useState(false);
+    function searchMovies(savedMovies, isShortMovie, serchText,) {
 
-    const [allSavedMovies, setAllSavedMovies] = React.useState([])
+        setIsLoading(true)
+        let foundMovies = savedMovies;
+        foundMovies = foundMovies.filter((movie) => movie.nameRU.toLowerCase().includes(serchText.toLowerCase()));
+        if (foundMovies.length === 0) {
+            setIsNoMovies(true)
+            setResponseMessage("Ничего не найдено")
+            setIsNoMovies(true);
+        } else if (isShortMovie) {
+            foundMovies = foundMovies.filter((movie) => movie.duration < 40)
+        }
+        setIsLoading(false);
+        setSavedMovies(foundMovies);
 
-
-    function getAllMovies() {
-        api.getMovies()
-            .then((res) => {
-                setAllSavedMovies(res)
-            })
-            .catch((err) => console.log(err))
     }
-
-    React.useEffect(() => {
-        getAllMovies()
-
-    }, [])
-
 
     return (
         <div className="saved-movies">
             <Header
-                isLoggedIn={true}
+                isLoggedIn={isLoggedIn}
                 isVisible={true}
                 openSideMenu={openSideMenu} />
             <main className="saved-movies__container">
                 <SearchForm
-                    allSavedMovies={allSavedMovies}
-                    onSerchMovies={searchMovies} />
-                <MoviesCardList
-                    movies={allSavedMovies}
-                    isLoading={isLoading}
-                    // movies={savedMovies}
-                    onMovieClick={onMovieClick}
-                    isSavedMovies={isSavedMovies}
-                />
+                    allMovies={savedMovies}
+                    onSearchMovies={searchMovies} />
+                {isLoading ? <Preloader /> :
+                    !isNoMovies ? <MoviesCardList
+                        movies={savedMovies}
+                        savedMovies={savedMovies}
+                        onMovieClick={onMovieClick}
+                        isSavedMovies={isSavedMovies}
+                    /> : <Response
+                        responseMessage={responseMessage}
+                    />
+                }
+
             </main>
             <Footer />
         </div>

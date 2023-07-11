@@ -14,7 +14,7 @@ function Form({ isRegister, onSubmit }) {
 
 
     return (
-        <form className="form" isValid={isValid}  onSubmit={handleSubmit}>
+        <form className="form"  onSubmit={handleSubmit}>
             {isRegister ? (
                 <label className="form-label">Имя
                     <input type="name"

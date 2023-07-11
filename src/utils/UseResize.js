@@ -3,7 +3,7 @@ import {
   SCREEN_S,
   SCREEN_M,
   SCREEN_L,
- } from './consts';
+} from './consts';
 
 export const useResize = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -18,7 +18,6 @@ export const useResize = () => {
     };
   }, []);
 
-
   return {
     width,
     isScreenS: width >= SCREEN_S,
@@ -26,5 +25,4 @@ export const useResize = () => {
     isScreenL: width >= SCREEN_L,
 
   };
-
 };

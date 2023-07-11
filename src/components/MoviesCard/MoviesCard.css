@@ -42,7 +42,24 @@
 .movies-card__save-btn_active {
     background-color: #3456F3;
 }
+.movies-card__del-btn {
+    background-image: url(../../images/d9.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    border-radius: 36px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 14px;
+    top: 19px;
+    cursor: pointer;
+    z-index: 99;
+}
 
+.movies-card__del-btn:hover {
+    opacity: 0.7;
+}
 
 .movies-card__duration {
     font-weight: 400;
@@ -59,6 +76,5 @@
 .movies-card__img {
     width: 100%;
     background-size: cover;
-
-
+    background-position: center;
 }

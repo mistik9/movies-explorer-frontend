@@ -10,14 +10,15 @@ import {
     ADD_INDEX_SCREEN_L,
 
 } from "../../utils/consts";
-import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList({ movies, isLoading, onMovieClick, savedMovies, isSavedMovies }) {
-    const { width, isScreenS, isScreenM, isScreenL, } = useResize();
 
+function MoviesCardList({ movies, onMovieClick, savedMovies, isSavedMovies }) {
+    const { isScreenS, isScreenM, isScreenL, } = useResize();
     const [isCompleted, setIsCompleted] = React.useState(false)
     const [index, setIndex] = React.useState(renderMoviesCards())
     const [addIndex, setAddIndex] = React.useState(addMovieCards())
+
+    // const isSaved = savedMovies
 
     const initialMovies = movies.slice(0, index)
 
@@ -47,30 +48,25 @@ function MoviesCardList({ movies, isLoading, onMovieClick, savedMovies, isSavedM
             setIsCompleted(false)
         }
     }
-
-    function checkIsMovieSaved (movie) {
-        return savedMovies.some((savedMovie) => savedMovie.movieId === movie.id)
-        
-      }
+ 
 
     return (
         <section className="card-list">
-            <Preloader 
-             isLoading={isLoading}
-            />
             <ul className="card-list__list">
 
                 {initialMovies.map((movie) =>
                     <MoviesCard
-                        key={movie.movieId}
+                        key={movie.id}
                         movie={movie}
                         onClick={onMovieClick}
-                        isSaved={checkIsMovieSaved}
                         isSavedMovies={isSavedMovies}
+                        savedMovies={savedMovies}
+                        saved={savedMovies.some((savedMovie) => savedMovie.id === movie.id ? true: false)}
+
                     />
                 )}
             </ul>
-            {!isCompleted ? (<button className={`card-list__btn ${isSavedMovies ?"card-list__btn_hidden" :""}`} type="button" onClick={loadMore}>Еще</button>) : ""}
+            {!isCompleted ? (<button className={`card-list__btn ${isSavedMovies ? "card-list__btn_hidden" : ""}`} type="button" onClick={loadMore}>Еще</button>) : ""}
         </section>
     )
 }

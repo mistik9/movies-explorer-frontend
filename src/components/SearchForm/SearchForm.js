@@ -3,14 +3,14 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
 
-function SearchForm({allMovies, onSerchMovies }) {
+function SearchForm({allMovies, onSearchMovies }) {
     const [serchText, setSerchText] = React.useState([]);
     const [isShortMovie, setSiShortMovie] = React.useState(false);
 
     
     function handleSubmit(e) {
         e.preventDefault();
-        onSerchMovies({allMovies, isShortMovie, serchText});
+        onSearchMovies(allMovies, isShortMovie, serchText);
     }
     
     function handleChangeSearch(e) {

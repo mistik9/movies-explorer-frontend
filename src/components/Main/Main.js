@@ -9,10 +9,13 @@ import "./Main.css";
 
 
 
-function Main({ isLoggedIn, isVisible }) {
+function Main({ isLoggedIn, isVisible, openSideMenu }) {
     return (
         <div className="main">
-                <Header isLoggedIn={false} isColored={true} isVisible={false}/>
+                <Header isLoggedIn={false}
+                 isColored={true} 
+                 isVisible={false}
+                 openSideMenu={openSideMenu}/>
                 <main className="main__content">
                 <Promo />
                 <NavTab />
