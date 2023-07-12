@@ -18,9 +18,17 @@
 - Организованы роуты
 - Верстка по макету
 
+  ### задачи level-3
+- Работа с BeatfilmMoviesApi (получение списка фильмов)
+- Запросы к API
+- Авторизация и регистрация, редактирование профиля
+- Фильтрация данных на стороне клиента
 
 ## Ссылка на макет Figma:
 https://disk.yandex.ru/d/2eu3KiE3QA33Yw
 
 ## Ссылка Pull request
 https://github.com/mistik9/movies-explorer-frontend/pull/2
+
+## Ссылка на проект
+https://hollysht.nomoredomains.work/
