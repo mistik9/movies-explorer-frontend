@@ -28,6 +28,10 @@
     cursor: pointer;
 }
 
+.navigation__link_active {
+    font-weight: 400;
+}
+
 .navigation__link_signin {
     background: #3456F3;
     border-radius: 3px;
@@ -41,11 +45,9 @@
     font-size: 14px;
     line-height: 18px;
     text-align: right;
-    font-weight: 500;
 }
 
 .navigation__link_saved-movies {
-    font-weight: 400;
     font-size: 14px;
     line-height: 18px;
     margin-left: 20px;

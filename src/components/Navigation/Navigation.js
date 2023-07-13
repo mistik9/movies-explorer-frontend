@@ -1,26 +1,27 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navigation.css"
 
 function Navigation({ isLoggedIn, openSideMenu, }) {
+    console.log(isLoggedIn)
     return (
         <div>
             <ul className={`navigation__list ${!isLoggedIn ? "" : "navigation__list_hidden"}`}>
                 <li className="navigation__list-item">
-                    <Link to="/signup" className="navigation__link navigation__link_signup">Регистрация</Link>
+                    <NavLink to="/signup" className="navigation__link navigation__link_signup">Регистрация</NavLink>
                 </li>
                 <li className="navigation__list-item">
-                    <Link to="/signin" className="navigation__link navigation__link_signin">Войти</Link>
+                    <NavLink to="/signin" className="navigation__link navigation__link_signin">Войти</NavLink>
                 </li>
             </ul>
             <ul className={`navigation__list navigation__list_movie  ${isLoggedIn ? "" : "navigation__list_hidden"}`}>
                 <li className="navigation__list-item">
-                    <Link to="/movies" className="navigation__link navigation__link_movies">Фильмы</Link>
+                    <NavLink to="/movies" className={({ isActive }) => `navigation__link navigation__link_movies ${isActive ? "navigation__link_active" : ""}`}>Фильмы</NavLink>
                 </li>
                 <li className="navigation__list-item">
-                    <Link to="/saved-movies" className="navigation__link navigation__link_saved-movies">Сохраненные фильмы</Link>
+                    <NavLink to="/saved-movies" className={({ isActive }) => `navigation__link navigation__link_saved-movies ${isActive ? "navigation__link_active" : ""}`}>Сохраненные фильмы</NavLink>
                 </li>
                 <li className="navigation__list-item">
-                    <Link to="/profile" className="navigation__link navigation__link_profile"> Аккаунт</Link>
+                    <NavLink to="/profile" className="navigation__link navigation__link_profile"> Аккаунт</NavLink>
                     <div className="navigation__icon_profile" ></div>
                 </li>
             </ul>

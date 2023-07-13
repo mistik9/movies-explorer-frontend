@@ -3,39 +3,50 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
 
-function SearchForm({allMovies, onSearchMovies }) {
-    const [serchText, setSerchText] = React.useState([]);
-    const [isShortMovie, setSiShortMovie] = React.useState(false);
+function SearchForm({ allMovies, onSearchMovies, foundMovies }) {
 
+    const defaultSerchText = localStorage.getItem('serchText') ?? '';
+    const defaultIsShortMovie = JSON.parse(localStorage.getItem('isShortMovie')) ?? false;
     
+
+    const [serchText, setSerchText] = React.useState(defaultSerchText);
+    const [isShortMovie, setSiShortMovie] = React.useState(defaultIsShortMovie);
+        
+
+    React.useEffect(() => {
+        localStorage.setItem('searchText', serchText);
+        localStorage.setItem('isShortMovie', isShortMovie);
+        localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
+    }, [foundMovies, isShortMovie, serchText]);
+
     function handleSubmit(e) {
         e.preventDefault();
-        onSearchMovies(allMovies, isShortMovie, serchText);
+        onSearchMovies(foundMovies, isShortMovie, serchText);
     }
-    
+
     function handleChangeSearch(e) {
         setSerchText(e.target.value);
     }
 
     function handleChangeCheckBox(e) {
-        setSiShortMovie(e.target.checked) 
-     
+        setSiShortMovie(e.target.checked)
+
     }
 
 
     return (
         <div className="serch">
             <form className="serch__form" onSubmit={handleSubmit}>
-                <input className="serch__input" 
-                placeholder="Фильм" 
-                type="search" 
-                required 
-                minLength="2"
-                maxLength="200"
-                value={serchText} 
-                onChange={handleChangeSearch} />
+                <input className="serch__input"
+                    placeholder="Фильм"
+                    type="search"
+                    required
+                    minLength="2"
+                    maxLength="200"
+                    value={serchText}
+                    onChange={handleChangeSearch} />
                 <button className="serch__btn" aria-label="Найти" type="submit">Найти</button>
-                <FilterCheckbox onChange={handleChangeCheckBox} isShortMovie={isShortMovie}/>
+                <FilterCheckbox onChange={handleChangeCheckBox} isShortMovie={isShortMovie} />
             </form>
 
         </div>

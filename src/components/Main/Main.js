@@ -12,7 +12,7 @@ import "./Main.css";
 function Main({ isLoggedIn, isVisible, openSideMenu }) {
     return (
         <div className="main">
-                <Header isLoggedIn={false}
+                <Header isLoggedIn={isLoggedIn}
                  isColored={true} 
                  isVisible={false}
                  openSideMenu={openSideMenu}/>

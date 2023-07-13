@@ -26,7 +26,7 @@ function App() {
     const [allMovies, setAllMovies] = React.useState([]);
 
     const navigate = useNavigate()
-    console.log()
+
     //открытие сайдменю
     function openSideMenu() {
         setIsSidemenuOpen(true);
@@ -92,6 +92,9 @@ function App() {
                 setIsloggedIn(false);
                 setCurrentUser({});
                 console.log(isLoggedIn)
+                localStorage.removeItem('serchText');
+                localStorage.removeItem('isShortMovie');
+                localStorage.removeItem('allMovies');
 
             })
             .catch((err) => console.log(err))
@@ -115,21 +118,24 @@ function App() {
 
     // проверка токена
     function handleTokenCheck() {
-        api.checkToken()
+         api.checkToken()
             .then((res) => {
                 if (res) {
                     setCurrentUser(res)
                     setIsloggedIn(true);
                     navigate("/movies", { replace: true });
 
-
                 }
             })
             .catch((err) => {
+                localStorage.removeItem('serchText');
+                localStorage.removeItem('isShortMovie');
+                localStorage.removeItem('allMovies');
                 setInfoMessage({ isSuccess: false, message: SMT_WENT_WRONG })
                 setIsPopupOpen(true)
                 console.log("Ошибка токена")
             })
+  
     }
 
     React.useEffect(() => {

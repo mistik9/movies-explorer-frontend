@@ -1,6 +1,6 @@
 export const MOVIE_URL = 'https://api.nomoreparties.co';
-export const MAIN_API_URL = "https://hollysht.nomoredomains.rocks/api";
-// export const MAIN_API_URL = 'http://localhost:3001';
+// export const MAIN_API_URL = "https://hollysht.nomoredomains.rocks/api";
+ export const MAIN_API_URL = 'http://localhost:3001';
 export const CONFLICT = 409;
 export const AUTH_ERROR = 401;
 
@@ -12,6 +12,7 @@ export const UPDATE_USER_DATA = 'Данные пользователя обно�
 export const SERVER_MESSAGE = 'На сервере произошла ошибка';
 export const NOT_FOUND_MESSAGE = 'Cтраница не найдена';
 
+export const SHORT_MOVIE_DURATION =40;
 export const SCREEN_S = 320;
 export const SCREEN_M = 690;
 export const SCREEN_L = 1080;
