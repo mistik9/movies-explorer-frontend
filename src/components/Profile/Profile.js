@@ -23,8 +23,11 @@ function Profile({ onUpdateUser, isLoggedIn, onLogout, openSideMenu, isVisible }
 
     function handleSubmit(e) {
         e.preventDefault();
-        onUpdateUser(values);
-
+        if (values === currentUser) {
+            isValid = false
+        } else {
+        onUpdateUser(values || currentUser);
+        }
     }
 
     return (
@@ -40,10 +43,9 @@ function Profile({ onUpdateUser, isLoggedIn, onLogout, openSideMenu, isVisible }
                             type="name"
                             id="name"
                             name="name"
-                            pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
-                            value={values.name || ''}
-                            placeholder={currentUser.name}
-                            onChange={handleChange}
+                            pattern="[A-Za-zА-Яа-яЁё\s-]+"
+                            value={values.name || currentUser.name}
+                                                   onChange={handleChange}
                             minLength="2"
                             maxLength="200"
                             required />
@@ -56,9 +58,8 @@ function Profile({ onUpdateUser, isLoggedIn, onLogout, openSideMenu, isVisible }
                             id="email"
                             name="email"
                             pattern='^[^ ]+@[^ ]+\.[a-z]{2,3}$'
-                            value={values.email || ''}
-                            placeholder={currentUser.email}
-                            onChange={handleChange}
+                            value={values.email || currentUser.email}
+                                              onChange={handleChange}
                             required
                             minLength="2"
                             maxLength="40" />

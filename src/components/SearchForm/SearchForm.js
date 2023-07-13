@@ -13,16 +13,13 @@ function SearchForm({ allMovies, onSearchMovies, foundMovies }) {
     const [isShortMovie, setSiShortMovie] = React.useState(defaultShortMovie);
 
     React.useEffect(() => {
-        if(serchText) localStorage.setItem('searchText', serchText);
+        if (serchText) localStorage.setItem('searchText', serchText);
         localStorage.setItem('isShortMovie', isShortMovie);
-    }, [ isShortMovie, serchText]);
+    }, [isShortMovie, serchText]);
 
     const [values, setValues] = React.useState({});
     const [errors, setErrors] = React.useState({});
     const [isValid, setIsValid] = React.useState(false);
-  
-
-
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -40,26 +37,24 @@ function SearchForm({ allMovies, onSearchMovies, foundMovies }) {
 
     function handleChangeCheckBox(e) {
         setSiShortMovie(e.target.checked)
-
     }
-    console.log({errors})
 
     return (
         <div className="serch">
             <form className="serch__form" onSubmit={handleSubmit} >
                 <label className="serch__input-label">
-                <input className="serch__input"
-                    placeholder="Фильм"
-                    type="search"
-                    id="search"
-                    name="search"
-                    required
-                    minLength="2"
-                    maxLength="200"
-                    value={serchText}
-                    onChange={handleChangeSearch} />
+                    <input className="serch__input"
+                        placeholder="Фильм"
+                        type="search"
+                        id="search"
+                        name="search"
+                        required
+                        minLength="2"
+                        maxLength="200"
+                        value={serchText}
+                        onChange={handleChangeSearch} />
                     <span id="error" className="serch__error">{errors.search}</span>
-                    </label>
+                </label>
                 <button className="serch__btn" aria-label="Найти" type="submit" disabled={!isValid}>Найти</button>
                 <FilterCheckbox onChange={handleChangeCheckBox} isShortMovie={isShortMovie} />
             </form>
