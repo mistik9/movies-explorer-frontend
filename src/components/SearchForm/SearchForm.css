@@ -7,27 +7,41 @@
     font-style: normal;
     font-weight: 400;
     border-bottom: 1px solid rgb(170, 170, 170, 0.2);
-
+    position: relative;
 }
 
 .serch__form {
-
     width: 100%;
     display: flex;
     align-items: center;
-    position: relative;
     box-sizing: border-box;
 
 }
+
 
 .serch__input {
     min-height: 48px;
     opacity: 0.2;
     border: 1.5px solid #AAAAAA;
     border-radius: 50px;
-    width: 100%;
+    padding-right: 50px;
     padding: 15px 0 15px 22px;
+    margin-bottom: 7px;
+}
 
+.serch__input-label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+
+}
+
+.serch__error {
+    color: #EE3465;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
 
 }
 
@@ -43,8 +57,15 @@
     line-height: 18px;
     position: absolute;
     right: 200px;
+    top: 81px;
     margin: 8px;
     cursor: pointer;
+}
+
+.serch__btn:disabled {
+    background-color: #AAAAAA;
+    pointer-events: none;
+
 }
 
 .serch__btn:hover {
@@ -54,34 +75,31 @@
 @media screen and (max-width: 1000px) {
     .serch__form {
         flex-direction: column;
-
     }
 
     .serch {
         max-width: calc(100% - 60px);
         align-items: center;
         padding: 60px 0 58px 0;
+    }
 
+    .serch__input-label {
+        margin-bottom: 37px;
     }
 
     .serch__input {
-        margin-bottom: 37px;
+
         font-size: 14px;
         line-height: 18px;
     }
 
     .serch__btn {
         right: 1px;
-
+        top:60px
     }
 }
 
 @media screen and (max-width: 540px) {
-    .serch__form {
-     
-
-    }
-
     .serch {
         max-width: calc(100% - 28px);
         align-items: center;
@@ -89,10 +107,18 @@
 
     }
 
-    .serch__input {
+    .serch__input-label {
         margin-bottom: 44px;
+    }
+
+    .serch__input {
+
         font-size: 11px;
         line-height: 18px;
     }
 
+    .serch__btn {
+        right: 2px;
+
+    }
 }
