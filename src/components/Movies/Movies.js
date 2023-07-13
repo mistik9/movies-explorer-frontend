@@ -16,24 +16,29 @@ function Movies({ isLoggedIn, savedMovies, isSaved, openSideMenu, isVisible, onM
   const [isLoading, setIsLoading] = React.useState(false);
   const [responseMessage, setResponseMessage] = React.useState("");
   const [isNoMovies, setIsNoMovies] = React.useState(false);
+
+  const defaultFoundMovies = JSON.parse(localStorage.getItem('foundMovies')) ?? [];
+  const [foundMoviesState, setFoundMoviesState] = React.useState(defaultFoundMovies);
+
   
-  const [foundMovies, setFoundMovies] = React.useState([]);
+  React.useEffect(() => {
+    localStorage.setItem('foundMovies', JSON.stringify(foundMoviesState));
+}, [foundMoviesState]);
   
 
   //загрузка всех фильмов
   React.useEffect(() => {
-    if (isLoggedIn) {
     setIsLoading(true)
     getMovies()
       .then((res) => {
-        setAllMovies(res)
+        defaultFoundMovies.length > 0 ? setAllMovies(defaultFoundMovies) : setAllMovies(res)
       })
       .catch((err) => console.log(err))
       .finally(() => {
         setIsLoading(false)
       })
-    }
-  }, [isLoggedIn])
+
+  }, [])
 
 
   function searchMovies(allMovies, isShortMovie, serchText) {
@@ -48,7 +53,9 @@ function Movies({ isLoggedIn, savedMovies, isSaved, openSideMenu, isVisible, onM
       foundMovies = foundMovies.filter((movie) => movie.duration < SHORT_MOVIE_DURATION)
     }
     setIsLoading(false);
-    setFoundMovies(foundMovies);
+    
+    setAllMovies(foundMovies);
+    setFoundMoviesState(foundMovies);
   }
 
 
@@ -63,7 +70,7 @@ function Movies({ isLoggedIn, savedMovies, isSaved, openSideMenu, isVisible, onM
         <SearchForm
           allMovies={allMovies}
           onSearchMovies={searchMovies}
-          foundMovies={foundMovies}
+          foundMovies={foundMoviesState}
            />
         {isLoading ? <Preloader /> :
           !isNoMovies ? <MoviesCardList

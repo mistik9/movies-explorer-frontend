@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import "./Navigation.css"
 
 function Navigation({ isLoggedIn, openSideMenu, }) {
-    console.log(isLoggedIn)
     return (
         <div>
             <ul className={`navigation__list ${!isLoggedIn ? "" : "navigation__list_hidden"}`}>

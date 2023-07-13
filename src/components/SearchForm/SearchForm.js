@@ -5,23 +5,21 @@ import "./SearchForm.css";
 
 function SearchForm({ allMovies, onSearchMovies, foundMovies }) {
 
-    const defaultSerchText = localStorage.getItem('serchText') ?? '';
-    const defaultIsShortMovie = JSON.parse(localStorage.getItem('isShortMovie')) ?? false;
+    const defaultSerchText = localStorage.getItem('searchText') ?? '';
+    const defaultShortMovie = JSON.parse(localStorage.getItem('isShortMovie')) ?? false;
     
-
     const [serchText, setSerchText] = React.useState(defaultSerchText);
-    const [isShortMovie, setSiShortMovie] = React.useState(defaultIsShortMovie);
+    const [isShortMovie, setSiShortMovie] = React.useState(defaultShortMovie);
         
-
     React.useEffect(() => {
-        localStorage.setItem('searchText', serchText);
+        if(serchText) localStorage.setItem('searchText', serchText);
         localStorage.setItem('isShortMovie', isShortMovie);
-        localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
-    }, [foundMovies, isShortMovie, serchText]);
+    }, [ isShortMovie, serchText]);
+
 
     function handleSubmit(e) {
         e.preventDefault();
-        onSearchMovies(foundMovies, isShortMovie, serchText);
+        onSearchMovies(allMovies, isShortMovie, serchText);
     }
 
     function handleChangeSearch(e) {
@@ -32,7 +30,6 @@ function SearchForm({ allMovies, onSearchMovies, foundMovies }) {
         setSiShortMovie(e.target.checked)
 
     }
-
 
     return (
         <div className="serch">
