@@ -12,8 +12,17 @@ function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick,
     const [isLoading, setIsLoading] = React.useState(false);
     const [responseMessage, setResponseMessage] = React.useState("");
     const [isNoMovies, setIsNoMovies] = React.useState(false);
-    function searchMovies(savedMovies, isShortMovie, serchText,) {
 
+    const defaultFoundMovies = JSON.parse(localStorage.getItem('foundMovies')) ?? [];
+    const [foundMoviesState, setFoundMoviesState] = React.useState(defaultFoundMovies);
+  
+    
+    React.useEffect(() => {
+      localStorage.setItem('foundMovies', JSON.stringify(foundMoviesState));
+  }, [foundMoviesState]);
+
+
+    function searchMovies(savedMovies, isShortMovie, serchText,) {
         setIsLoading(true)
         let foundMovies = savedMovies;
         foundMovies = foundMovies.filter((movie) => movie.nameRU.toLowerCase().includes(serchText.toLowerCase()));
@@ -26,6 +35,7 @@ function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick,
         }
         setIsLoading(false);
         setSavedMovies(foundMovies);
+        setFoundMoviesState(foundMovies);
 
     }
 

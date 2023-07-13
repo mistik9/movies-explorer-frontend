@@ -49,7 +49,7 @@ function SearchForm({ allMovies, onSearchMovies, foundMovies }) {
                         id="search"
                         name="search"
                         required
-                        minLength="2"
+                        minLength="1"
                         maxLength="200"
                         value={serchText}
                         onChange={handleChangeSearch} />

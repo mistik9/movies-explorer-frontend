@@ -123,7 +123,7 @@ function App() {
                 if (res) {
                     setCurrentUser(res)
                     setIsloggedIn(true);
-                    navigate("/movies", { replace: true });
+  
 
                 }
             })
