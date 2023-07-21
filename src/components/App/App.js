@@ -123,16 +123,13 @@ function App() {
                 if (res) {
                     setCurrentUser(res)
                     setIsloggedIn(true);
-  
-
-                }
+                    navigate("/", { replace: true })
+                  }
             })
             .catch((err) => {
                 localStorage.removeItem('serchText');
                 localStorage.removeItem('isShortMovie');
                 localStorage.removeItem('allMovies');
-                setInfoMessage({ isSuccess: false, message: SMT_WENT_WRONG })
-                setIsPopupOpen(true)
                 console.log("Ошибка токена")
             })
   

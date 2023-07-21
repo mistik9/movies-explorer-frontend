@@ -11,30 +11,37 @@ function Profile({ onUpdateUser, isLoggedIn, onLogout, openSideMenu, isVisible }
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState(currentUser.name);
     const [email, setEmail] = React.useState(currentUser.email);
+    const [activeBtn, setActiveBtn] = React.useState(false)
 
 
-    const { values, errors, isValid, handleChange } = useFormWithValidation()
+    const { values, errors, isValid,handleChange } = useFormWithValidation(currentUser)
 
     React.useEffect(() => {
-        setName(currentUser.name || "");
-        setEmail(currentUser.email || "");
+        setName(values.name || currentUser.name);
+        setEmail(values.email || currentUser.email);
     }, [currentUser]);
-
+    
+    React.useEffect(() => {
+        if ((values.name === currentUser.name || values.email === currentUser.email)) {
+                 setActiveBtn(false)
+        } else {
+            setActiveBtn(true)
+        }
+    }, [currentUser, values]);
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (values === currentUser) {
-            isValid = false
-        } else {
-        onUpdateUser(values || currentUser);
+           if (isValid) {
+            onUpdateUser({name, email});
+
         }
     }
 
     return (
         <div className="profile">
-            <Header isLoggedIn={isLoggedIn} isVisible={true} openSideMenu={openSideMenu}/>
+            <Header isLoggedIn={isLoggedIn} isVisible={true} openSideMenu={openSideMenu} />
             <main className="profile__content">
-                <h2 className="profile__title">Привет, {values.name || currentUser.name}
+                <h2 className="profile__title">Привет, {currentUser.name}
                     !</h2>
                 <form className="profile__form" onSubmit={handleSubmit}>
                     <label className="profile__input-label">
@@ -43,9 +50,9 @@ function Profile({ onUpdateUser, isLoggedIn, onLogout, openSideMenu, isVisible }
                             type="name"
                             id="name"
                             name="name"
-                            pattern="[A-Za-zА-Яа-яЁё\s-]+"
-                            value={values.name || currentUser.name}
-                                                   onChange={handleChange}
+                            pattern="[A-Za-zА-Яа-яЁё]+"
+                            value={values.name ?? currentUser.name}
+                            onChange={handleChange}
                             minLength="2"
                             maxLength="200"
                             required />
@@ -58,14 +65,14 @@ function Profile({ onUpdateUser, isLoggedIn, onLogout, openSideMenu, isVisible }
                             id="email"
                             name="email"
                             pattern='^[^ ]+@[^ ]+\.[a-z]{2,3}$'
-                            value={values.email || currentUser.email}
-                                              onChange={handleChange}
+                            value={values.email ?? currentUser.email}
+                            onChange={handleChange}
                             required
                             minLength="2"
                             maxLength="40" />
                         <span id="password-error" className="profile__error">{errors.email}</span>
                     </label>
-                    <button className="profile__btn profile__btn_edit" type="submit" disabled={!isValid}>Редактировать</button>
+                    <button className="profile__btn profile__btn_edit" type="submit" disabled={!isValid || !activeBtn}>Редактировать</button>
                 </form>
                 <button className="profile__btn profile__btn_red" onClick={onLogout}>Выйти из аккаунта</button>
             </main>
