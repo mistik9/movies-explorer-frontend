@@ -118,13 +118,13 @@ function App() {
 
     // проверка токена
     function handleTokenCheck() {
-         api.checkToken()
+        api.checkToken()
             .then((res) => {
                 if (res) {
                     setCurrentUser(res)
                     setIsloggedIn(true);
                     navigate("/", { replace: true })
-                  }
+                }
             })
             .catch((err) => {
                 localStorage.removeItem('serchText');
@@ -132,7 +132,7 @@ function App() {
                 localStorage.removeItem('allMovies');
                 console.log("Ошибка токена")
             })
-  
+
     }
 
     React.useEffect(() => {

@@ -1,6 +1,6 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import React from "react";
+import React, { useEffect } from "react";
 import { useResize } from '../../utils/UseResize';
 import {
     INDEX_SCREEN_S,
@@ -13,34 +13,30 @@ import {
     SCREEN_S
 
 } from "../../utils/consts";
+import { add } from "lodash";
 
 
 function MoviesCardList({ movies, onMovieClick, savedMovies, isSavedMovies }) {
     const { width, isScreenS, isScreenM, isScreenL, } = useResize();
     const [isCompleted, setIsCompleted] = React.useState(false)
-    const [index, setIndex] = React.useState(renderMoviesCards())
-    const [addIndex, setAddIndex] = React.useState(addMovieCards())
+    const [index, setIndex] = React.useState(0)
+    const [addIndex, setAddIndex] = React.useState(0)
 
-    // const isSaved = savedMovies
 
     const initialMovies = movies.slice(0, index)
 
-
-    function renderMoviesCards() {
-        if (width >= SCREEN_L) {
-            return INDEX_SCREEN_L;
-        } else if (width > SCREEN_M && width < SCREEN_L) {
-            return INDEX_SCREEN_M;
+    useEffect(() => {
+        if (width < SCREEN_S) {
+            setIndex(INDEX_SCREEN_S)
+            setAddIndex(ADD_INDEX_SCREEN_S)
+        } else if (width < SCREEN_L) {
+            setIndex(INDEX_SCREEN_M)
+            setAddIndex(ADD_INDEX_SCREEN_S)
         } else {
-            return INDEX_SCREEN_S;
+            setIndex(INDEX_SCREEN_L)
+            setAddIndex(ADD_INDEX_SCREEN_L)
         }
-    }
-    function addMovieCards() {
-        if (width > SCREEN_S && width < SCREEN_L) {
-            return ADD_INDEX_SCREEN_S;
-        } else if (width > SCREEN_L)
-            return ADD_INDEX_SCREEN_L;
-    }
+    }, [width])
 
     const loadMore = () => {
         setAddIndex(addIndex)
