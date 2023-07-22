@@ -1,29 +1,49 @@
 import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
+import { SHORT_MOVIE_DURATION } from "../../utils/consts"
 
-
-
-function SearchForm({ allMovies, onSearchMovies, foundMovies }) {
-
+function SearchForm({ allMovies, setAllMovies, setResponseMessage, setFoundMoviesState, setIsNoMovies, setIsLoading }) {
     const defaultSerchText = localStorage.getItem('searchText') ?? '';
     const defaultShortMovie = JSON.parse(localStorage.getItem('isShortMovie')) ?? false;
-
     const [serchText, setSerchText] = React.useState(defaultSerchText);
     const [isShortMovie, setSiShortMovie] = React.useState(defaultShortMovie);
-
-    React.useEffect(() => {
-        if (serchText) localStorage.setItem('searchText', serchText);
-        localStorage.setItem('isShortMovie', isShortMovie);
-    }, [isShortMovie, serchText]);
-
-    const [values, setValues] = React.useState({});
     const [errors, setErrors] = React.useState({});
     const [isValid, setIsValid] = React.useState(false);
 
+    React.useEffect(() => {
+        if (serchText) {
+            localStorage.setItem('searchText', serchText);
+            localStorage.setItem('isShortMovie', isShortMovie);
+        }
+    }, [isShortMovie, serchText]);
+
+    function searchMovies(allMovies, isShortMovie, serchText) {
+        setIsLoading(true)
+        allMovies = allMovies.filter((movie) => movie.nameRU.toLowerCase().includes(serchText.toLowerCase()));
+
+        if (allMovies.length === 0) {
+            setIsNoMovies(true)
+            setResponseMessage("Ничего не найдено")
+            setIsNoMovies(true);
+        } else if (isShortMovie) {
+            allMovies = allMovies.filter((movie) => movie.duration < SHORT_MOVIE_DURATION);
+        }
+        setIsLoading(false);
+        setAllMovies(allMovies);
+        setFoundMoviesState(allMovies);
+    }
+
+    function filterCheckbox(allMovies, checkboxState) {
+        setIsLoading(true)
+        if (checkboxState) allMovies = allMovies.filter((movie) => movie.duration < SHORT_MOVIE_DURATION);
+        setIsLoading(false);
+        setAllMovies(allMovies);
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
-        onSearchMovies(allMovies, isShortMovie, serchText);
+        searchMovies(allMovies, isShortMovie, serchText);
     }
 
     function handleChangeSearch(event) {
@@ -36,7 +56,9 @@ function SearchForm({ allMovies, onSearchMovies, foundMovies }) {
     }
 
     function handleChangeCheckBox(e) {
-        setSiShortMovie(e.target.checked)
+        const checkboxState = e.target.checked;
+        filterCheckbox(allMovies, checkboxState);
+        setSiShortMovie(checkboxState);
     }
 
     return (

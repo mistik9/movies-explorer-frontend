@@ -12,7 +12,8 @@ import SideMenu from "../SideMenu/SideMenu";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import api from "../../utils/MainApi";
 import Popup from "../Popup/Popup";
-import { CONFLICT, AUTH_ERROR, CONFLICT_USER_MESSAGE, AUTH_ERROR_MESSAGE, SMT_WENT_WRONG, SIGNUP_MESSAGE, UPDATE_USER_DATA } from "../../utils/consts"
+import { CONFLICT, AUTH_ERROR, CONFLICT_USER_MESSAGE, AUTH_ERROR_MESSAGE, SMT_WENT_WRONG, SIGNUP_MESSAGE, UPDATE_USER_DATA } from "../../utils/consts";
+import getMovies from "../../utils/MoviesApi";
 
 
 function App() {
@@ -22,8 +23,10 @@ function App() {
     const [currentUser, setCurrentUser] = React.useState({});
     const [isPopupOpen, setIsPopupOpen] = React.useState(false);
     const [infoMessage, setInfoMessage] = React.useState({ isSuccess: false, message: "" })
-    const [savedMovies, setSavedMovies] = React.useState([]);
     const [allMovies, setAllMovies] = React.useState([]);
+    const [savedMovies, setSavedMovies] = React.useState([]);
+    const defaultFoundMovies = JSON.parse(localStorage.getItem('foundMovies')) ?? [];
+    const [foundMoviesState, setFoundMoviesState] = React.useState(defaultFoundMovies);
 
     const navigate = useNavigate()
 
@@ -92,9 +95,7 @@ function App() {
                 setIsloggedIn(false);
                 setCurrentUser({});
                 console.log(isLoggedIn)
-                localStorage.removeItem('serchText');
-                localStorage.removeItem('isShortMovie');
-                localStorage.removeItem('allMovies');
+                localStorage.clear();
 
             })
             .catch((err) => console.log(err))
@@ -127,9 +128,7 @@ function App() {
                 }
             })
             .catch((err) => {
-                localStorage.removeItem('serchText');
-                localStorage.removeItem('isShortMovie');
-                localStorage.removeItem('allMovies');
+                localStorage.clear();
                 console.log("Ошибка токена")
             })
 
@@ -139,16 +138,18 @@ function App() {
         handleTokenCheck();
     }, [])
 
-    //загрузка данных о пользователе
+    //загрузка данных о пользователе и всех фильмах
     React.useEffect(() => {
         if (isLoggedIn) {
-            api.getUserData()
-                .then((currentUser) => {
+            Promise.all([api.getUserData(),getMovies()])
+                .then(([currentUser, res]) => {
                     setCurrentUser(currentUser)
+                    defaultFoundMovies.length > 0 ? setAllMovies(defaultFoundMovies) : setAllMovies(res)
                 })
                 .catch((err) => console.log(err))
         }
     }, [isLoggedIn])
+
 
     // добавить в сохраненные
     function handleAddSavedMovie(movie) {
@@ -172,7 +173,7 @@ function App() {
             })
     }
 
-
+    //переключатель сохранения фильмов
     function handleMovieClick(movie) {
         const isSaved = savedMovies.some((savedMovie) => savedMovie.id === movie.id ? true : false);
         if (isSaved) {
@@ -202,8 +203,15 @@ function App() {
                         <ProtectedRoute isLoggedIn={isLoggedIn} element={<Movies
                             isLoggedIn={isLoggedIn}
                             savedMovies={savedMovies}
+                            isSavedMovies={false}
                             openSideMenu={openSideMenu}
                             onMovieClick={handleMovieClick}
+                            setSavedMovies={setSavedMovies}
+                            setFoundMoviesState={setFoundMoviesState}
+                            foundMoviesState={foundMoviesState}
+                            allMovies={allMovies}
+                            setAllMovies={setAllMovies}
+                    
                         />}
                         />
                     } />
@@ -228,7 +236,7 @@ function App() {
                             onUpdateUser={handleUpdateUser} />}
                         />
                     } />
-                    <Route path='*' element={<NotFound />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
                 <SideMenu
                     isOpen={isSideMenuOpen}

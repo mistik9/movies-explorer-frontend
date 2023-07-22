@@ -1,6 +1,6 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import React, { useEffect } from "react";
+import React from "react";
 import { useResize } from '../../utils/UseResize';
 import {
     INDEX_SCREEN_S,
@@ -9,23 +9,20 @@ import {
     ADD_INDEX_SCREEN_S,
     ADD_INDEX_SCREEN_L,
     SCREEN_L,
-    SCREEN_M,
     SCREEN_S
-
 } from "../../utils/consts";
-import { add } from "lodash";
+
 
 
 function MoviesCardList({ movies, onMovieClick, savedMovies, isSavedMovies }) {
-    const { width, isScreenS, isScreenM, isScreenL, } = useResize();
+    const { width } = useResize();
     const [isCompleted, setIsCompleted] = React.useState(false)
     const [index, setIndex] = React.useState(0)
     const [addIndex, setAddIndex] = React.useState(0)
 
-
     const initialMovies = movies.slice(0, index)
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (width < SCREEN_S) {
             setIndex(INDEX_SCREEN_S)
             setAddIndex(ADD_INDEX_SCREEN_S)
@@ -42,28 +39,22 @@ function MoviesCardList({ movies, onMovieClick, savedMovies, isSavedMovies }) {
         setAddIndex(addIndex)
         setIndex(index + addIndex)
 
-
         if (index.Number > movies.length) {
             setIsCompleted(true)
         } else {
             setIsCompleted(false)
-
         }
     }
-
     return (
         <section className="card-list">
             <ul className="card-list__list">
-
                 {initialMovies.map((movie) =>
                     <MoviesCard
                         key={movie.id}
                         movie={movie}
                         onClick={onMovieClick}
                         isSavedMovies={isSavedMovies}
-                        savedMovies={savedMovies}
                         saved={savedMovies.some((savedMovie) => savedMovie.id === movie.id ? true : false)}
-
                     />
                 )}
             </ul>

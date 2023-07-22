@@ -7,37 +7,17 @@ import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import Response from "../Response/Response";
 
-
 function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick, openSideMenu, isLoggedIn }) {
     const [isLoading, setIsLoading] = React.useState(false);
     const [responseMessage, setResponseMessage] = React.useState("");
     const [isNoMovies, setIsNoMovies] = React.useState(false);
+    const [foundMoviesState, setFoundMoviesState] = React.useState([]);
 
-    const defaultFoundMovies = JSON.parse(localStorage.getItem('foundMovies')) ?? [];
-    const [foundMoviesState, setFoundMoviesState] = React.useState(defaultFoundMovies);
-  
-    
-    React.useEffect(() => {
-      localStorage.setItem('foundMovies', JSON.stringify(foundMoviesState));
-  }, [foundMoviesState]);
-
-
-    function searchMovies(savedMovies, isShortMovie, serchText,) {
-        setIsLoading(true)
-        let foundMovies = savedMovies;
-        foundMovies = foundMovies.filter((movie) => movie.nameRU.toLowerCase().includes(serchText.toLowerCase()));
-        if (foundMovies.length === 0) {
-            setIsNoMovies(true)
-            setResponseMessage("Ничего не найдено")
-            setIsNoMovies(true);
-        } else if (isShortMovie) {
-            foundMovies = foundMovies.filter((movie) => movie.duration < 40)
-        }
-        setIsLoading(false);
-        setSavedMovies(foundMovies);
-        setFoundMoviesState(foundMovies);
-
-    }
+    // React.useEffect(() => {
+    //     api.getMovies()
+    //         .then((res) => setSavedMovies(res))
+    //         .catch((err) => console.log(err))
+    // }, [isSavedMovies]);
 
     return (
         <div className="saved-movies">
@@ -48,7 +28,13 @@ function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick,
             <main className="saved-movies__container">
                 <SearchForm
                     allMovies={savedMovies}
-                    onSearchMovies={searchMovies} />
+                    setAllMovies={setSavedMovies}
+                    setIsLoading={setIsLoading}
+                    setResponseMessage={setResponseMessage}
+                    setIsNoMovies={setIsNoMovies}
+                    setSavedMovies={setSavedMovies}
+                    setFoundMoviesState={setFoundMoviesState}
+                />
                 {isLoading ? <Preloader /> :
                     !isNoMovies ? <MoviesCardList
                         movies={savedMovies}
