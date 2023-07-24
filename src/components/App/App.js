@@ -25,7 +25,9 @@ function App() {
     const [isPopupOpen, setIsPopupOpen] = React.useState(false);
     const [infoMessage, setInfoMessage] = React.useState({ isSuccess: false, message: "" })
     const [allMovies, setAllMovies] = React.useState([]);
+    const [foundMovies, setFoundMovies] = React.useState([]);
     const [savedMovies, setSavedMovies] = React.useState([]);
+    const [foundSavedMovies, setFoundSavedMovies] = React.useState([]);
     const defaultFoundMovies = JSON.parse(localStorage.getItem('foundMovies')) ?? [];
     const [foundMoviesState, setFoundMoviesState] = React.useState(defaultFoundMovies);
 
@@ -54,8 +56,9 @@ function App() {
                 setIsPopupOpen(true)
                 setInfoMessage({ isSuccess: true, message: SIGNUP_MESSAGE })
                 setIsloggedIn(true)
+                setCurrentUser(res);
                 navigate("/movies", { replace: true });
-                setCurrentUser(currentUser);
+                console.log({isLoggedIn, currentUser, res })
             })
             .catch((err) => {
                 if (err === CONFLICT) {
@@ -77,7 +80,7 @@ function App() {
                 } else {
                     setIsloggedIn(true);
                     navigate("/movies", { replace: true });
-                    setCurrentUser(res.user);
+                    setCurrentUser(res);
                 }
             })
             .catch((err) => {
@@ -86,7 +89,6 @@ function App() {
                 console.log(err)
             })
     }
-
 
     //выйти
     function handleLogout({ email }) {
@@ -140,12 +142,22 @@ function App() {
     //загрузка данных о пользователе и всех фильмах
     React.useEffect(() => {
         if (isLoggedIn) {
+            setIsLoading(true)
             Promise.all([api.getUserData(), getMovies()])
                 .then(([currentUser, res]) => {
+                    console.log({currentUser, res})
                     setCurrentUser(currentUser)
-                    defaultFoundMovies.length > 0 ? setAllMovies(defaultFoundMovies) : setAllMovies(res)
+                    if (defaultFoundMovies.length > 0) {
+                        setAllMovies(defaultFoundMovies);
+                        setFoundMovies(defaultFoundMovies);
+                    } else {
+                        setAllMovies(res);
+                        setFoundMovies(res);
+                    }
+
                 })
                 .catch((err) => console.log(err))
+                .finally(() => setIsLoading(false))
         }
     }, [isLoggedIn])
 
@@ -203,30 +215,34 @@ function App() {
                     } />
                     <Route path="/movies" element={
                         <ProtectedRoute isLoggedIn={isLoggedIn} element={<Movies
+                            isLoading={isLoading}
+                            setIsLoading={setIsLoading}
                             isLoggedIn={isLoggedIn}
                             savedMovies={savedMovies}
                             isSavedMovies={false}
                             openSideMenu={openSideMenu}
                             onMovieClick={handleMovieClick}
-                            setSavedMovies={setSavedMovies}
                             setFoundMoviesState={setFoundMoviesState}
                             foundMoviesState={foundMoviesState}
                             allMovies={allMovies}
                             setAllMovies={setAllMovies}
-
+                            foundMovies={foundMovies}
+                            setFoundMovies={setFoundMovies}
                         />}
                         />
                     } />
                     <Route path="/saved-movies" element={
                         <ProtectedRoute isLoggedIn={isLoggedIn} element={<SavedMovies
-                            isLoggedIn={isLoggedIn}
                             isLoading={isLoading}
+                            setIsLoading={setIsLoading}
+                            isLoggedIn={isLoggedIn}
                             isSavedMovies={true}
                             savedMovies={savedMovies}
                             openSideMenu={openSideMenu}
                             onMovieClick={handleMovieClick}
                             setSavedMovies={setSavedMovies}
-
+                            foundSavedMovies={foundSavedMovies}
+                            setFoundSavedMovies={setFoundSavedMovies}
                         />}
                         />
                     } />

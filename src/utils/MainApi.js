@@ -69,8 +69,8 @@ class Api {
   register({ email, password, name }) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
-
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password, name }),

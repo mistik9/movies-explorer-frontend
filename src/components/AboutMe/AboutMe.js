@@ -14,8 +14,7 @@ function AboutMe() {
         <p className="about-me__subtitle">Фронтенд-разработчик, 37 лет</p>
         <p className="about-me__text">
           Я живу в Омске, закончила ОмГТУ. У меня есть муж
-          и дочь. Я люблю разное и всякая шляпа
-
+          и дочь. Я люблю разное и всякое и я хочу выдохнуть
         </p>
         <a className="about-me__link" href="https://github.com/mistik9" rel="noreferrer" target="_blank">Github</a>
       </div>

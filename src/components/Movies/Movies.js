@@ -5,29 +5,21 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Response from "../Response/Response";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import api from "../../utils/MainApi";
+
 
 import "./Movies.css";
 
 
-function Movies({ isLoggedIn, savedMovies, setSavedMovies, isSavedMovies, openSideMenu, onMovieClick, foundMoviesState, setFoundMoviesState, allMovies, setAllMovies }) {
+function Movies({ isLoading, setIsLoading, isLoggedIn, savedMovies, isSavedMovies, openSideMenu, onMovieClick, foundMoviesState, setFoundMoviesState, allMovies, foundMovies, setFoundMovies }) {
 
-  const [isLoading, setIsLoading] = React.useState(false);
   const [responseMessage, setResponseMessage] = React.useState("");
   const [isNoMovies, setIsNoMovies] = React.useState(false);
   const defaultShortMovie = JSON.parse(localStorage.getItem('isShortMovie')) || false;
   const [isShortMovie, setSiShortMovie] = React.useState(defaultShortMovie);
-
+  
   React.useEffect(() => {
     localStorage.setItem('foundMovies', JSON.stringify(foundMoviesState));
   }, [foundMoviesState]);
-
-  React.useEffect(() => {
-    api.getMovies()
-      .then((res) => setSavedMovies(res))
-      .catch((err) => console.log(err))
-  }, [isSavedMovies]);
-
 
   return (
     <div className="movies">
@@ -42,14 +34,14 @@ function Movies({ isLoggedIn, savedMovies, setSavedMovies, isSavedMovies, openSi
           setFoundMoviesState={setFoundMoviesState}
           setIsNoMovies={setIsNoMovies}
           setIsLoading={setIsLoading}
-          setAllMovies={setAllMovies}
           setSiShortMovie={setSiShortMovie}
           isShortMovie={isShortMovie}
-
+          setFoundMovies={setFoundMovies}
+          isSavedMovies={isSavedMovies}
         />
         {isLoading ? <Preloader /> :
           !isNoMovies ? <MoviesCardList
-            movies={allMovies}
+            movies={foundMovies}
             savedMovies={savedMovies}
             onMovieClick={onMovieClick}
             isSavedMovies={isSavedMovies}

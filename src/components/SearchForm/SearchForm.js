@@ -1,18 +1,17 @@
 import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
-import { useLocation } from "react-router-dom";
 
-function SearchForm({ allMovies, setAllMovies, setResponseMessage, setFoundMoviesState, setIsNoMovies, setIsLoading, isShortMovie, setSiShortMovie }) {
-    const location = useLocation();
-    const defaultSerchText = location.pathname === '/movies' ? (localStorage.getItem('searchText') || '') : '';
+function SearchForm({ allMovies, setResponseMessage, setFoundMoviesState, setIsNoMovies, setIsLoading, isShortMovie, setSiShortMovie, setFoundMovies, isSavedMovies }) {
+
+    const defaultSerchText = !isSavedMovies ? (localStorage.getItem('searchText') || '') : '';
     const [serchText, setSerchText] = React.useState(defaultSerchText);
     const [errors, setErrors] = React.useState({});
     const [isValid, setIsValid] = React.useState(false);
     
 
     React.useEffect(() => {
-        if (serchText && location.pathname === '/movies') {
+        if (serchText && !isSavedMovies) {
             localStorage.setItem('searchText', serchText);
             localStorage.setItem('isShortMovie', isShortMovie);
         }
@@ -25,7 +24,7 @@ function SearchForm({ allMovies, setAllMovies, setResponseMessage, setFoundMovie
             setIsNoMovies(true);
             setResponseMessage("Ничего не найдено");
         } 
-        setAllMovies(allMovies);
+        setFoundMovies(allMovies);
         setFoundMoviesState(allMovies);
         setIsLoading(false);
     }

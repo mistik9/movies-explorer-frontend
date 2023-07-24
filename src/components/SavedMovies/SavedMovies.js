@@ -6,14 +6,23 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import Response from "../Response/Response";
+import api from "../../utils/MainApi";
 
-function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick, openSideMenu, isLoggedIn }) {
-    const [isLoading, setIsLoading] = React.useState(false);
+function SavedMovies({ isLoading, setIsLoading, savedMovies, setSavedMovies, isSavedMovies, onMovieClick, openSideMenu, isLoggedIn, foundSavedMovies, setFoundSavedMovies }) {
     const [responseMessage, setResponseMessage] = React.useState("");
     const [isNoMovies, setIsNoMovies] = React.useState(false);
     const [foundMoviesState, setFoundMoviesState] = React.useState([]);
     const [isShortMovie, setSiShortMovie] = React.useState(false);
 
+    React.useEffect(() => {
+        api.getMovies()
+          .then((res) => {
+            setSavedMovies(res)
+            setFoundSavedMovies(res);
+        })
+          .catch((err) => console.log(err))
+      }, [isSavedMovies]);
+    
     return (
         <div className="saved-movies">
             <Header
@@ -23,18 +32,18 @@ function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick,
             <main className="saved-movies__container">
                 <SearchForm
                     allMovies={savedMovies}
-                    setAllMovies={setSavedMovies}
                     setIsLoading={setIsLoading}
                     setResponseMessage={setResponseMessage}
                     setIsNoMovies={setIsNoMovies}
-                    setSavedMovies={setSavedMovies}
                     setFoundMoviesState={setFoundMoviesState}
                     isShortMovie={isShortMovie}
                     setSiShortMovie={setSiShortMovie}
+                    setFoundMovies={setFoundSavedMovies}
+                    isSavedMovies={isSavedMovies}
                 />
                 {isLoading ? <Preloader /> :
                     !isNoMovies ? <MoviesCardList
-                        movies={savedMovies}
+                        movies={foundSavedMovies}
                         savedMovies={savedMovies}
                         onMovieClick={onMovieClick}
                         isSavedMovies={isSavedMovies}
