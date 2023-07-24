@@ -19,7 +19,7 @@ function Profile({ onUpdateUser, isLoggedIn, onLogout, openSideMenu, isVisible }
     React.useEffect(() => {
         setName(values.name || currentUser.name);
         setEmail(values.email || currentUser.email);
-    }, [currentUser]);
+    }, [currentUser, values]);
     
     React.useEffect(() => {
         if ((values.name === currentUser.name || values.email === currentUser.email)) {
@@ -50,7 +50,7 @@ function Profile({ onUpdateUser, isLoggedIn, onLogout, openSideMenu, isVisible }
                             type="name"
                             id="name"
                             name="name"
-                            pattern="[A-Za-zА-Яа-яЁё]+"
+                            pattern="[A-Za-zА-Яа-яЁё\s\-]+"
                             value={values.name ?? currentUser.name}
                             onChange={handleChange}
                             minLength="2"

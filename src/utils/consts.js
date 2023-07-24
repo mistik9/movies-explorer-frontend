@@ -1,6 +1,6 @@
 export const MOVIE_URL = 'https://api.nomoreparties.co';
-export const MAIN_API_URL = "https://hollysht.nomoredomains.rocks/api";
-  // export const MAIN_API_URL = 'http://localhost:3001';
+// export const MAIN_API_URL = "https://hollysht.nomoredomains.rocks/api";
+ export const MAIN_API_URL = 'http://localhost:3001';
 export const CONFLICT = 409;
 export const AUTH_ERROR = 401;
 

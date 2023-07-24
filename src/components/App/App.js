@@ -1,7 +1,7 @@
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import React from "react";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Profile from "../Profile/Profile";
@@ -14,6 +14,7 @@ import api from "../../utils/MainApi";
 import Popup from "../Popup/Popup";
 import { CONFLICT, AUTH_ERROR, CONFLICT_USER_MESSAGE, AUTH_ERROR_MESSAGE, SMT_WENT_WRONG, SIGNUP_MESSAGE, UPDATE_USER_DATA } from "../../utils/consts";
 import getMovies from "../../utils/MoviesApi";
+
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
     const [foundMoviesState, setFoundMoviesState] = React.useState(defaultFoundMovies);
 
     const navigate = useNavigate()
+    const location = useLocation();
 
     //открытие сайдменю
     function openSideMenu() {
@@ -65,7 +67,6 @@ function App() {
             })
     }
 
-
     //авторизация
     function handleLogin({ email, password }) {
         api.authorize(email, password)
@@ -94,7 +95,6 @@ function App() {
                 navigate("/", { replace: true })
                 setIsloggedIn(false);
                 setCurrentUser({});
-                console.log(isLoggedIn)
                 localStorage.clear();
 
             })
@@ -124,14 +124,13 @@ function App() {
                 if (res) {
                     setCurrentUser(res)
                     setIsloggedIn(true);
-                    navigate("/", { replace: true })
+                    navigate(location.pathname, { replace: true })
                 }
             })
             .catch((err) => {
                 localStorage.clear();
                 console.log("Ошибка токена")
             })
-
     }
 
     React.useEffect(() => {
@@ -141,7 +140,7 @@ function App() {
     //загрузка данных о пользователе и всех фильмах
     React.useEffect(() => {
         if (isLoggedIn) {
-            Promise.all([api.getUserData(),getMovies()])
+            Promise.all([api.getUserData(), getMovies()])
                 .then(([currentUser, res]) => {
                     setCurrentUser(currentUser)
                     defaultFoundMovies.length > 0 ? setAllMovies(defaultFoundMovies) : setAllMovies(res)
@@ -189,11 +188,14 @@ function App() {
             <div>
                 <Routes>
                     <Route path="/signup" element={
-                        <Register onRegister={handleRegister} />
+                        <Register onRegister={handleRegister}
+                            isLoggedIn={isLoggedIn}
+                        />
                     } />
 
                     <Route path="/signin" element={
-                        <Login onLogin={handleLogin} />
+                        <Login onLogin={handleLogin}
+                            isLoggedIn={isLoggedIn} />
                     } />
                     <Route path="/" element={
                         <Main
@@ -211,7 +213,7 @@ function App() {
                             foundMoviesState={foundMoviesState}
                             allMovies={allMovies}
                             setAllMovies={setAllMovies}
-                    
+
                         />}
                         />
                     } />
