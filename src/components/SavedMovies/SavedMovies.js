@@ -12,12 +12,7 @@ function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick,
     const [responseMessage, setResponseMessage] = React.useState("");
     const [isNoMovies, setIsNoMovies] = React.useState(false);
     const [foundMoviesState, setFoundMoviesState] = React.useState([]);
-
-    // React.useEffect(() => {
-    //     api.getMovies()
-    //         .then((res) => setSavedMovies(res))
-    //         .catch((err) => console.log(err))
-    // }, [isSavedMovies]);
+    const [isShortMovie, setSiShortMovie] = React.useState(false);
 
     return (
         <div className="saved-movies">
@@ -34,6 +29,8 @@ function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick,
                     setIsNoMovies={setIsNoMovies}
                     setSavedMovies={setSavedMovies}
                     setFoundMoviesState={setFoundMoviesState}
+                    isShortMovie={isShortMovie}
+                    setSiShortMovie={setSiShortMovie}
                 />
                 {isLoading ? <Preloader /> :
                     !isNoMovies ? <MoviesCardList
@@ -41,6 +38,7 @@ function SavedMovies({ savedMovies, setSavedMovies, isSavedMovies, onMovieClick,
                         savedMovies={savedMovies}
                         onMovieClick={onMovieClick}
                         isSavedMovies={isSavedMovies}
+                        isShortMovie={isShortMovie}
                     /> : <Response
                         responseMessage={responseMessage}
                     />

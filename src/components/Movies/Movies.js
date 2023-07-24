@@ -15,6 +15,8 @@ function Movies({ isLoggedIn, savedMovies, setSavedMovies, isSavedMovies, openSi
   const [isLoading, setIsLoading] = React.useState(false);
   const [responseMessage, setResponseMessage] = React.useState("");
   const [isNoMovies, setIsNoMovies] = React.useState(false);
+  const defaultShortMovie = JSON.parse(localStorage.getItem('isShortMovie')) || false;
+  const [isShortMovie, setSiShortMovie] = React.useState(defaultShortMovie);
 
   React.useEffect(() => {
     localStorage.setItem('foundMovies', JSON.stringify(foundMoviesState));
@@ -41,6 +43,8 @@ function Movies({ isLoggedIn, savedMovies, setSavedMovies, isSavedMovies, openSi
           setIsNoMovies={setIsNoMovies}
           setIsLoading={setIsLoading}
           setAllMovies={setAllMovies}
+          setSiShortMovie={setSiShortMovie}
+          isShortMovie={isShortMovie}
 
         />
         {isLoading ? <Preloader /> :
@@ -49,6 +53,7 @@ function Movies({ isLoggedIn, savedMovies, setSavedMovies, isSavedMovies, openSi
             savedMovies={savedMovies}
             onMovieClick={onMovieClick}
             isSavedMovies={isSavedMovies}
+            isShortMovie={isShortMovie}
 
           /> : <Response
             responseMessage={responseMessage}

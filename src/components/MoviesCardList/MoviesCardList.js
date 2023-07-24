@@ -11,15 +11,18 @@ import {
     SCREEN_L,
     SCREEN_S
 } from "../../utils/consts";
+import { SHORT_MOVIE_DURATION } from "../../utils/consts";
 
 
 
-function MoviesCardList({ movies, onMovieClick, savedMovies, isSavedMovies }) {
+
+function MoviesCardList({ movies, onMovieClick, savedMovies, isSavedMovies, isShortMovie }) {
     const { width } = useResize();
     const [isCompleted, setIsCompleted] = React.useState(false)
     const [index, setIndex] = React.useState(0)
     const [addIndex, setAddIndex] = React.useState(0)
 
+    if(isShortMovie) movies = movies.filter((movie) => movie.duration < SHORT_MOVIE_DURATION)
     const initialMovies = movies.slice(0, index)
 
     React.useEffect(() => {

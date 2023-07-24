@@ -8,7 +8,7 @@ function FilterCheckbox({ onChange, isShortMovie}) {
     <div className="checkbox">
       <p className="checkbox__name">Короткометражки</p>
           <div className={`checkbox__image ${isShortMovie ? "" : "checkbox__image_unactive"}`} >
-      <input  className="checkbox__input" name="short-movies" type="checkbox" onClick={onChange} value={isShortMovie}/>
+      <input  className="checkbox__input" name="short-movies" type="checkbox" onClick={onChange} value={isShortMovie} defaultChecked={isShortMovie}/>
       </div>
     </div>
   )
