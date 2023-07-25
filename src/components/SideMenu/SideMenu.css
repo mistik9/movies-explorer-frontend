@@ -10,8 +10,7 @@
     transition-duration: 0.8s;
     justify-content: center;
     align-items: center;
-    font-family: "Inter", "Arial", "sans-serif";
-    z-index: 2;
+     z-index: 2;
     background-color: rgba(0,0,0,.3);
    
 }
@@ -50,6 +49,7 @@
 }
 .side-menu__list {
     margin: 159px 90px 90px 90px;
+   
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -63,6 +63,7 @@
 }
 
 .side-menu__link {
+    font-family: "Inter", "Arial", "sans-serif";
     text-decoration: none;
     color: #000000;
     text-align: center;
@@ -131,7 +132,7 @@
 }
 
 .side-menu__link {
-    text-decoration: none;
+        text-decoration: none;
     color: #000000;
     text-align: center;
     font-size: 18px;
@@ -151,10 +152,8 @@
 
 }
 .side-menu__list-item_profile {
-
     margin-top: 420px;
 }
 
-    
-
+   
 }
